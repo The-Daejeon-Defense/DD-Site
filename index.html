@@ -28,6 +28,7 @@
       <button onclick="showTab('home')"        id="tab-home"        class="tab-btn tab-active    py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">홈</button>
       <button onclick="showTab('power')"       id="tab-power"       class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">멤버 전투력</button>
       <button onclick="showTab('competition')" id="tab-competition" class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">대항전 현황</button>
+      <button onclick="showTab('training')"   id="tab-training"   class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">길드 수련장</button>
     </nav>
   </header>
 
@@ -127,6 +128,32 @@
       </div>
     </section>
 
+    <!-- ───── 길드 수련장 섹션 ───── -->
+    <section id="section-training" class="hidden">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-800">
+          <div class="font-semibold text-white text-sm">길드 수련장 현황</div>
+          <div class="text-xs text-gray-500 mt-0.5">전체 순위 기준 오름차순</div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
+              <tr>
+                <th class="px-4 py-3 text-left">길드명</th>
+                <th class="px-4 py-3 text-center">전체 순위</th>
+                <th class="px-4 py-3 text-center">월드</th>
+                <th class="px-4 py-3 text-center">월드 내</th>
+                <th class="px-4 py-3 text-right">전투력</th>
+                <th class="px-4 py-3 text-center">멤버</th>
+                <th class="px-4 py-3 text-center">레벨</th>
+              </tr>
+            </thead>
+            <tbody id="training-table-body" class="divide-y divide-gray-800"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-700">
@@ -186,6 +213,16 @@
       { overall: 717, world_rank: 29, world:  7, guild: "트러블메이커", power: "32조 624억 435만", members: 30, level: 7 },
     ];
 
+    const TRAINING_DATA = [
+      { overall: 679, world_rank: 38, world:  2, guild: "표창",       power: "34조 707억 588만", members: 30, level: 8 },
+      { overall: 688, world_rank: 27, world:  5, guild: "공무수행",   power: "33조 904억 53만",  members: 30, level: 8 },
+      { overall: 693, world_rank: 20, world: 10, guild: "노란",       power: "33조 550억 20만",  members: 30, level: 8 },
+      { overall: 695, world_rank: 25, world:  7, guild: "흰토깽단",   power: "33조 481억 540만", members: 30, level: 7 },
+      { overall: 697, world_rank: 12, world: 19, guild: "대전방범대", power: "33조 405억 388만", members: 28, level: 7 },
+      { overall: 718, world_rank: 13, world: 19, guild: "떡잎어린이집", power: "32조 600억 217만", members: 29, level: 7 },
+      { overall: 728, world_rank: 23, world:  6, guild: "화신",       power: "31조 844억 834만", members: 29, level: 8 },
+    ];
+
     // ─────────────────────────────────────────
     //  유틸
     // ─────────────────────────────────────────
@@ -212,14 +249,11 @@
     //  탭 전환
     // ─────────────────────────────────────────
     function showTab(name) {
-      ['home', 'power', 'competition'].forEach(t => {
+      ['home', 'power', 'competition', 'training'].forEach(t => {
         document.getElementById(`section-${t}`).classList.toggle('hidden', t !== name);
         const btn = document.getElementById(`tab-${t}`);
-        if (t === name) {
-          btn.classList.add('tab-active');
-        } else {
-          btn.classList.remove('tab-active');
-        }
+        if (t === name) btn.classList.add('tab-active');
+        else            btn.classList.remove('tab-active');
       });
     }
 
@@ -303,11 +337,38 @@
     }
 
     // ─────────────────────────────────────────
+    //  길드 수련장 섹션
+    // ─────────────────────────────────────────
+    function renderTraining() {
+      const sorted = [...TRAINING_DATA].sort((a, b) => a.overall - b.overall);
+
+      document.getElementById('training-table-body').innerHTML = sorted.map(d => {
+        const isOurs = d.guild === '대전방범대';
+        const rowCls = isOurs
+          ? 'bg-indigo-950/40 border-l-2 border-l-indigo-500'
+          : 'border-l-2 border-l-transparent';
+        return `
+          <tr class="${rowCls} hover:bg-gray-800/40 transition-colors">
+            <td class="px-4 py-3 font-bold ${isOurs ? 'text-indigo-300' : 'text-white'}">
+              ${isOurs ? '🛡️ ' : ''}${d.guild}
+            </td>
+            <td class="px-4 py-3 text-center text-gray-300 tabular-nums">#${d.overall}</td>
+            <td class="px-4 py-3 text-center text-gray-500">W${d.world}</td>
+            <td class="px-4 py-3 text-center text-gray-400">${d.world_rank}위</td>
+            <td class="px-4 py-3 text-right text-gray-200 tabular-nums">${d.power}</td>
+            <td class="px-4 py-3 text-center text-gray-400">${d.members}명</td>
+            <td class="px-4 py-3 text-center text-gray-400">Lv.${d.level}</td>
+          </tr>`;
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
     //  초기화
     // ─────────────────────────────────────────
     renderHome();
     renderPower();
     renderCompetition();
+    renderTraining();
   </script>
 </body>
 </html>
