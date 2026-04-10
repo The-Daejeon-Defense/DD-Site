@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대전방범대</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0a0a14; font-family: 'Segoe UI', sans-serif; }
+    .tab-active { border-bottom: 2px solid #6366f1; color: #a5b4fc !important; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f0f1a; }
+    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+  </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+
+  <!-- 헤더 + 네비 -->
+  <header class="border-b border-gray-800 bg-gray-950/80 backdrop-blur sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 pt-4 flex items-center gap-3">
+      <span class="text-2xl">🛡️</span>
+      <div>
+        <h1 class="text-lg font-black text-white leading-none">대전방범대</h1>
+        <p class="text-xs text-gray-500 leading-none mt-0.5">Guild Dashboard</p>
+      </div>
+    </div>
+    <nav class="max-w-5xl mx-auto px-4 flex gap-6 mt-2">
+      <button onclick="showTab('home')"        id="tab-home"        class="tab-btn tab-active    py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">홈</button>
+      <button onclick="showTab('power')"       id="tab-power"       class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">멤버 전투력</button>
+      <button onclick="showTab('competition')" id="tab-competition" class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">대항전 현황</button>
+    </nav>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- ───── 홈 섹션 ───── -->
+    <section id="section-home">
+      <!-- 길드 카드 -->
+      <div class="bg-gradient-to-br from-indigo-950/60 to-purple-950/40 border border-indigo-500/30 rounded-2xl p-6 mb-6">
+        <div class="flex items-start justify-between flex-wrap gap-4">
+          <div>
+            <div class="text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-1">우리 길드</div>
+            <h2 class="text-3xl font-black text-white mb-3">대전방범대</h2>
+            <div class="flex flex-wrap gap-4 text-sm">
+              <span class="text-gray-400">전투력 <span class="text-white font-bold">33조 405억</span></span>
+              <span class="text-gray-400">멤버 <span class="text-white font-bold">28명</span></span>
+              <span class="text-gray-400">레벨 <span class="text-white font-bold">7</span></span>
+              <span class="text-gray-400">월드 <span class="text-white font-bold">19</span></span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-gray-500 text-xs mb-1">전체 순위</div>
+            <div class="text-5xl font-black text-indigo-400">#697</div>
+            <div class="text-xs text-gray-500 mt-1">월드 내 12위</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 통계 카드 3개 -->
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">총 멤버</div>
+          <div class="text-2xl font-bold text-white" id="stat-members">—</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">총 전투력</div>
+          <div class="text-lg font-bold text-indigo-400 leading-tight" id="stat-total-power">—</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">평균 전투력</div>
+          <div class="text-lg font-bold text-blue-400 leading-tight" id="stat-avg-power">—</div>
+        </div>
+      </div>
+
+      <!-- TOP 3 -->
+      <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">전투력 TOP 3</div>
+      <div class="grid grid-cols-3 gap-4" id="top3-cards"></div>
+    </section>
+
+    <!-- ───── 멤버 전투력 섹션 ───── -->
+    <section id="section-power" class="hidden">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+          <span class="font-semibold text-white text-sm">멤버 목록</span>
+          <span class="text-xs text-gray-500" id="power-count"></span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
+              <tr>
+                <th class="px-4 py-3 text-left">닉네임</th>
+                <th class="px-4 py-3 text-center">직위</th>
+                <th class="px-4 py-3 text-center">레벨</th>
+                <th class="px-4 py-3 text-left">직업</th>
+                <th class="px-4 py-3 text-right">전투력</th>
+              </tr>
+            </thead>
+            <tbody id="power-table-body" class="divide-y divide-gray-800"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───── 대항전 현황 섹션 ───── -->
+    <section id="section-competition" class="hidden">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-800">
+          <div class="font-semibold text-white text-sm">길드 대항전 현황</div>
+          <div class="text-xs text-gray-500 mt-0.5">전체 순위 기준 오름차순</div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
+              <tr>
+                <th class="px-4 py-3 text-left">길드명</th>
+                <th class="px-4 py-3 text-center">전체 순위</th>
+                <th class="px-4 py-3 text-center">월드</th>
+                <th class="px-4 py-3 text-center">월드 내</th>
+                <th class="px-4 py-3 text-right">전투력</th>
+                <th class="px-4 py-3 text-center">멤버</th>
+                <th class="px-4 py-3 text-center">레벨</th>
+              </tr>
+            </thead>
+            <tbody id="competition-table-body" class="divide-y divide-gray-800"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-700">
+    대전방범대 대시보드 · 데이터 기준일: 2026-04-10
+  </footer>
+
+  <script>
+    // ─────────────────────────────────────────
+    //  데이터
+    // ─────────────────────────────────────────
+    const ROLE_ORDER = { "길마": 0, "점장": 1, "직원": 2, "알바": 3, "손님": 4 };
+
+    const ROLE_STYLE = {
+      "길마": "bg-yellow-500/20 text-yellow-300 border border-yellow-500/40",
+      "점장": "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40",
+      "직원": "bg-blue-500/20 text-blue-300 border border-blue-500/40",
+      "알바": "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40",
+      "손님": "bg-gray-500/20 text-gray-400 border border-gray-600/40",
+    };
+
+    const POWER_DATA = [
+      { name: "그린상훈",     role: "길마", level: 99,  job: "신궁",                power: 2968900000000 },
+      { name: "블랙경윤",     role: "점장", level: 100, job: "아크메이지(썬,콜)",   power: 3661300000000 },
+      { name: "실버정환",     role: "점장", level: 99,  job: "섀도어",              power: 2071800000000 },
+      { name: "오렌지완",     role: "직원", level: 98,  job: "아크메이지(불,독)",   power: 1181000000000 },
+      { name: "김안셀모",     role: "직원", level: 98,  job: "아크메이지(썬,콜)",   power: 2450900000000 },
+      { name: "지난이야기",   role: "직원", level: 98,  job: "히어로",              power: 1679000000000 },
+      { name: "빠따가2",      role: "직원", level: 99,  job: "신궁",                power: 5050400000000 },
+      { name: "레드웅이",     role: "직원", level: 91,  job: "비숍",                power: 104335990000  },
+      { name: "브라운철",     role: "직원", level: 87,  job: "아크메이지(썬,콜)",   power: 39180130000   },
+      { name: "전설의영포티", role: "직원", level: 93,  job: "섀도어",              power: 397761350000  },
+      { name: "하영과돌돌",   role: "직원", level: 96,  job: "히어로",              power: 1022200000000 },
+      { name: "냥꾸니",       role: "알바", level: 94,  job: "신궁",                power: 663848130000  },
+      { name: "토우르",       role: "손님", level: 93,  job: "신궁",                power: 282587830000  },
+      { name: "나로e",        role: "손님", level: 98,  job: "나이트로드",          power: 1782000000000 },
+      { name: "닼읔낰이트",   role: "손님", level: 96,  job: "다크나이트",          power: 1272400000000 },
+      { name: "도돍",         role: "손님", level: 95,  job: "아크메이지(썬,콜)",   power: 1296100000000 },
+      { name: "은평구돌주먹", role: "손님", level: 96,  job: "나이트로드",          power: 1032700000000 },
+      { name: "푸우임",       role: "손님", level: 96,  job: "섀도어",              power: 656186920000  },
+      { name: "짬뽕에소주",   role: "손님", level: 97,  job: "히어로",              power: 906669110000  },
+      { name: "쭈니짜응",     role: "손님", level: 96,  job: "섀도어",              power: 768887670000  },
+      { name: "가산요소",     role: "손님", level: 97,  job: "섀도어",              power: 740924490000  },
+      { name: "앙끼모륑",     role: "손님", level: 94,  job: "아크메이지(썬,콜)",   power: 553511730000  },
+      { name: "구준표춘",     role: "손님", level: 96,  job: "아크메이지(썬,콜)",   power: 572659720000  },
+      { name: "핫딜방문판매", role: "손님", level: 93,  job: "아크메이지(불,독)",   power: 318387210000  },
+      { name: "돈키호테바이", role: "손님", level: 92,  job: "섀도어",              power: 175111940000  },
+      { name: "몽팡팡",       role: "손님", level: 82,  job: "비숍",                power: 9857800000    },
+      { name: "민우민우민우", role: "손님", level: 98,  job: "섀도어",              power: 2241400000000 },
+      { name: "즐똥1",        role: "손님", level: 95,  job: "아크메이지(썬,콜)",   power: 742004710000  },
+    ];
+
+    const COMPETITION_DATA = [
+      { overall: 697, world_rank: 12, world: 19, guild: "대전방범대",   power: "33조 405억 388만", members: 28, level: 7 },
+      { overall: 708, world_rank: 28, world:  7, guild: "태극당",       power: "32조 966억 741만", members: 26, level: 7 },
+      { overall: 711, world_rank: 39, world:  2, guild: "ThRone",       power: "32조 773억 389만", members: 27, level: 8 },
+      { overall: 713, world_rank: 26, world:  9, guild: "강적",         power: "32조 697억 511만", members: 30, level: 8 },
+      { overall: 717, world_rank: 29, world:  7, guild: "트러블메이커", power: "32조 624억 435만", members: 30, level: 7 },
+    ];
+
+    // ─────────────────────────────────────────
+    //  유틸
+    // ─────────────────────────────────────────
+    function formatPower(n) {
+      const jo  = Math.floor(n / 1_000_000_000_000);
+      const eok = Math.floor((n % 1_000_000_000_000) / 100_000_000);
+      const man = Math.floor((n % 100_000_000) / 10_000);
+      const parts = [];
+      if (jo  > 0) parts.push(`${jo}조`);
+      if (eok > 0) parts.push(`${eok}억`);
+      if (man > 0) parts.push(`${man}만`);
+      return parts.join(' ') || '0';
+    }
+
+    function parsePowerKo(str) {
+      let total = 0;
+      const jo  = str.match(/(\d+)조/);  if (jo)  total += parseInt(jo[1])  * 1_000_000_000_000;
+      const eok = str.match(/(\d+)억/);  if (eok) total += parseInt(eok[1]) * 100_000_000;
+      const man = str.match(/(\d+)만/);  if (man) total += parseInt(man[1]) * 10_000;
+      return total;
+    }
+
+    // ─────────────────────────────────────────
+    //  탭 전환
+    // ─────────────────────────────────────────
+    function showTab(name) {
+      ['home', 'power', 'competition'].forEach(t => {
+        document.getElementById(`section-${t}`).classList.toggle('hidden', t !== name);
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === name) {
+          btn.classList.add('tab-active');
+        } else {
+          btn.classList.remove('tab-active');
+        }
+      });
+    }
+
+    // ─────────────────────────────────────────
+    //  홈 렌더링
+    // ─────────────────────────────────────────
+    function renderHome() {
+      const sorted = [...POWER_DATA].sort((a, b) => b.power - a.power);
+      const total  = sorted.reduce((s, d) => s + d.power, 0);
+      const avg    = total / sorted.length;
+      document.getElementById('stat-members').textContent     = sorted.length + '명';
+      document.getElementById('stat-total-power').textContent = formatPower(total);
+      document.getElementById('stat-avg-power').textContent   = formatPower(Math.round(avg));
+
+      const medals = ['🥇', '🥈', '🥉'];
+      const styles = [
+        'from-yellow-900/40 border-yellow-500/40 text-yellow-300',
+        'from-gray-700/30 border-gray-600/40 text-gray-300',
+        'from-orange-900/30 border-orange-600/40 text-orange-300',
+      ];
+      document.getElementById('top3-cards').innerHTML = sorted.slice(0, 3).map((d, i) => `
+        <div class="bg-gradient-to-br ${styles[i]} border rounded-xl p-5">
+          <div class="text-3xl mb-2">${medals[i]}</div>
+          <div class="font-black text-white text-base">${d.name}</div>
+          <div class="text-xs text-gray-400 mt-1">${d.job} · Lv.${d.level}</div>
+          <div class="text-sm mt-1 opacity-80">${formatPower(d.power)}</div>
+        </div>
+      `).join('');
+    }
+
+    // ─────────────────────────────────────────
+    //  멤버 목록 섹션
+    // ─────────────────────────────────────────
+    function renderPower() {
+      // 직위 순서 → 같은 직위 내에서는 전투력 내림차순
+      const sorted = [...POWER_DATA].sort((a, b) =>
+        ROLE_ORDER[a.role] !== ROLE_ORDER[b.role]
+          ? ROLE_ORDER[a.role] - ROLE_ORDER[b.role]
+          : b.power - a.power
+      );
+
+      document.getElementById('power-count').textContent = `총 ${sorted.length}명`;
+
+      document.getElementById('power-table-body').innerHTML = sorted.map(d => {
+        const badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold ${ROLE_STYLE[d.role]}">${d.role}</span>`;
+        return `
+          <tr class="hover:bg-gray-800/40 transition-colors">
+            <td class="px-4 py-3 font-medium text-white">${d.name}</td>
+            <td class="px-4 py-3 text-center">${badge}</td>
+            <td class="px-4 py-3 text-center text-gray-400">Lv.${d.level}</td>
+            <td class="px-4 py-3 text-gray-300">${d.job}</td>
+            <td class="px-4 py-3 text-right text-gray-200 tabular-nums">${formatPower(d.power)}</td>
+          </tr>`;
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
+    //  대항전 섹션
+    // ─────────────────────────────────────────
+    function renderCompetition() {
+      const sorted = [...COMPETITION_DATA].sort((a, b) => a.overall - b.overall);
+
+      document.getElementById('competition-table-body').innerHTML = sorted.map(d => {
+        const isOurs = d.guild === '대전방범대';
+        const rowCls = isOurs
+          ? 'bg-indigo-950/40 border-l-2 border-l-indigo-500'
+          : 'border-l-2 border-l-transparent';
+        return `
+          <tr class="${rowCls} hover:bg-gray-800/40 transition-colors">
+            <td class="px-4 py-3 font-bold ${isOurs ? 'text-indigo-300' : 'text-white'}">
+              ${isOurs ? '🛡️ ' : ''}${d.guild}
+            </td>
+            <td class="px-4 py-3 text-center text-gray-300 tabular-nums">#${d.overall}</td>
+            <td class="px-4 py-3 text-center text-gray-500">W${d.world}</td>
+            <td class="px-4 py-3 text-center text-gray-400">${d.world_rank}위</td>
+            <td class="px-4 py-3 text-right text-gray-200 tabular-nums">${d.power}</td>
+            <td class="px-4 py-3 text-center text-gray-400">${d.members}명</td>
+            <td class="px-4 py-3 text-center text-gray-400">Lv.${d.level}</td>
+          </tr>`;
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
+    //  초기화
+    // ─────────────────────────────────────────
+    renderHome();
+    renderPower();
+    renderCompetition();
+  </script>
+</body>
+</html>
