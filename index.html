@@ -27,8 +27,9 @@
     <nav class="max-w-5xl mx-auto px-4 flex gap-6 mt-2">
       <button onclick="showTab('home')"        id="tab-home"        class="tab-btn tab-active    py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">홈</button>
       <button onclick="showTab('power')"       id="tab-power"       class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">멤버 전투력</button>
+      <button onclick="showTab('raid')"        id="tab-raid"        class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">길드 토벌전</button>
       <button onclick="showTab('competition')" id="tab-competition" class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">길드 대항전</button>
-      <button onclick="showTab('training')"   id="tab-training"   class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">길드 수련장</button>
+      <button onclick="showTab('training')"    id="tab-training"    class="tab-btn               py-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">길드 수련장</button>
     </nav>
   </header>
 
@@ -158,6 +159,33 @@
       </div>
     </section>
 
+    <!-- ───── 길드 토벌전 섹션 ───── -->
+    <section id="section-raid" class="hidden">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+          <div>
+            <div class="font-semibold text-white text-sm">길드 토벌전 점수</div>
+            <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순</div>
+          </div>
+          <span class="text-xs text-gray-500" id="raid-count"></span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
+              <tr>
+                <th class="px-4 py-3 text-left w-12">순위</th>
+                <th class="px-4 py-3 text-left">닉네임</th>
+                <th class="px-4 py-3 text-center">직위</th>
+                <th class="px-4 py-3 text-right">전투력</th>
+                <th class="px-4 py-3 text-right">점수</th>
+              </tr>
+            </thead>
+            <tbody id="raid-table-body" class="divide-y divide-gray-800"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-700">
@@ -221,17 +249,18 @@
       { name: "전설의영포티", role: "직원", level: 93,  job: "섀도어",              power: 480086540000  },
       { name: "하영과돌돌",   role: "직원", level: 96,  job: "히어로",              power: 1100400000000 },
       { name: "냥꾸니",       role: "알바", level: 94,  job: "신궁",                power: 708932830000  },
-      { name: "토우르",       role: "손님", level: 93,  job: "신궁",                power: 347721440000  },
-      { name: "나로e",        role: "손님", level: 99,  job: "나이트로드",          power: 2026300000000 },
-      { name: "닼읔낰이트",   role: "손님", level: 96,  job: "다크나이트",          power: 1272400000000 },
-      { name: "도돍",         role: "손님", level: 96,  job: "아크메이지(썬,콜)",   power: 1410100000000 },
+      { name: "토우르",       role: "직원", level: 93,  job: "신궁",                power: 347721440000  },
+      { name: "나로e",        role: "알바", level: 99,  job: "나이트로드",          power: 2026300000000 },
+      { name: "닼읔낰이트",   role: "알바", level: 96,  job: "다크나이트",          power: 1272400000000 },
+      { name: "도돍",         role: "알바", level: 96,  job: "아크메이지(썬,콜)",   power: 1410100000000 },
       { name: "은평구돌주먹", role: "손님", level: 97,  job: "나이트로드",          power: 1153300000000 },
-      { name: "짬뽕에소주",   role: "손님", level: 97,  job: "히어로",              power: 1012000000000 },
+      { name: "짬뽕에소주",   role: "알바", level: 97,  job: "히어로",              power: 1012000000000 },
       { name: "쭈니짜응",     role: "손님", level: 97,  job: "섀도어",              power: 909293890000  },
-      { name: "가산요소",     role: "손님", level: 98,  job: "섀도어",              power: 872087850000  },
+      { name: "가산요소",     role: "알바", level: 98,  job: "섀도어",              power: 872087850000  },
       { name: "앙끼모륑",     role: "손님", level: 94,  job: "아크메이지(썬,콜)",   power: 568668990000  },
-      { name: "구준표춘",     role: "손님", level: 96,  job: "아크메이지(썬,콜)",   power: 578003680000  },
-      { name: "돈키호테바이", role: "손님", level: 92,  job: "섀도어",              power: 211626980000  },
+      { name: "구준표춘",     role: "알바", level: 96,  job: "아크메이지(썬,콜)",   power: 578003680000  },
+      { name: "돈키호테바이", role: "알바", level: 92,  job: "섀도어",              power: 211626980000  },
+      { name: "핫딜방문판매", role: "손님", level: 93,  job: "아크메이지(불,독)",   power: 324444870000  },
       { name: "몽팡팡",       role: "손님", level: 82,  job: "비숍",                power: 11525600000   },
       { name: "민우민우민우", role: "손님", level: 98,  job: "섀도어",              power: 2444400000000 },
       { name: "즐똥1",        role: "손님", level: 95,  job: "아크메이지(썬,콜)",   power: 848896740000  },
@@ -255,6 +284,38 @@
       { overall: 697, world_rank: 12, world: 19, guild: "대전방범대", power: "33조 405억 388만", members: 28, level: 7 },
       { overall: 718, world_rank: 13, world: 19, guild: "떡잎어린이집", power: "32조 600억 217만", members: 29, level: 7 },
       { overall: 728, world_rank: 23, world:  6, guild: "화신",       power: "31조 844억 834만", members: 29, level: 8 },
+    ];
+
+    const RAID_DATA = [
+      { name: "그린상훈",     power: 3528900000000,  score: "108억3907만"  },
+      { name: "블랙경윤",     power: 4161800000000,  score: "95억6731만"   },
+      { name: "실버정환",     power: 2236700000000,  score: "69억6266만"   },
+      { name: "오렌지완",     power: 1251600000000,  score: "60억4815만"   },
+      { name: "김안셀모",     power: 3193100000000,  score: "65억1191만"   },
+      { name: "지난이야기",   power: 1679000000000,  score: "54억9337만"   },
+      { name: "빠따가2",      power: 6722100000000,  score: "119억7722만"  },
+      { name: "레드웅이",     power: 113740620000,   score: "9억2291만"    },
+      { name: "브라운철",     power: 50504580000,    score: "5억88853만"   },
+      { name: "전설의영포티", power: 480086540000,   score: "14억8648만"   },
+      { name: "하영과돌돌",   power: 1100400000000,  score: "31억3345만"   },
+      { name: "토우르",       power: 347721440000,   score: "24억4540만"   },
+      { name: "냥꾸니",       power: 708932830000,   score: "22억5179만"   },
+      { name: "나로e",        power: 2026300000000,  score: "60억7836만"   },
+      { name: "닼읔낰이트",   power: 1272400000000,  score: "25억3124만"   },
+      { name: "도돍",         power: 1410100000000,  score: "52억1889만"   },
+      { name: "짬뽕에소주",   power: 1012000000000,  score: "33억9868만"   },
+      { name: "가산요소",     power: 872087850000,   score: "30억1133만"   },
+      { name: "구준표춘",     power: 578003680000,   score: "18억5777만"   },
+      { name: "돈키호테바이", power: 211626980000,   score: "9억4408만"    },
+      { name: "은평구돌주먹", power: 1153300000000,  score: "32억3899만"   },
+      { name: "쭈니짜응",     power: 909293890000,   score: "25억8041만"   },
+      { name: "앙끼모륑",     power: 568668990000,   score: "14억4565만"   },
+      { name: "핫딜방문판매", power: 324444870000,   score: "0"            },
+      { name: "몽팡팡",       power: 11525600000,    score: "1억8725만"    },
+      { name: "민우민우민우", power: 2444400000000,  score: "32억3752만"   },
+      { name: "즐똥1",        power: 848896740000,   score: "18억9041만"   },
+      { name: "표뚀",         power: 984974380000,   score: "0"            },
+      { name: "맞수",         power: 875815540000,   score: "0"            },
     ];
 
     // ─────────────────────────────────────────
@@ -283,12 +344,20 @@
     //  탭 전환
     // ─────────────────────────────────────────
     function showTab(name) {
-      ['home', 'power', 'competition', 'training'].forEach(t => {
+      ['home', 'power', 'competition', 'training', 'raid'].forEach(t => {
         document.getElementById(`section-${t}`).classList.toggle('hidden', t !== name);
         const btn = document.getElementById(`tab-${t}`);
         if (t === name) btn.classList.add('tab-active');
         else            btn.classList.remove('tab-active');
       });
+    }
+
+    function parseScoreKo(str) {
+      if (!str || str === '0') return 0;
+      let total = 0;
+      const eok = str.match(/(\d+)억/);  if (eok) total += parseInt(eok[1]) * 100_000_000;
+      const man = str.match(/(\d+)만/);  if (man) total += parseInt(man[1]) * 10_000;
+      return total;
     }
 
     // ─────────────────────────────────────────
@@ -421,10 +490,48 @@
     // ─────────────────────────────────────────
     //  초기화
     // ─────────────────────────────────────────
+    // ─────────────────────────────────────────
+    //  길드 토벌전 섹션
+    // ─────────────────────────────────────────
+    function renderRaid() {
+      // 점수 기준 내림차순, 0점은 맨 아래
+      const roleMap = Object.fromEntries(POWER_DATA.map(d => [d.name, d.role]));
+      const sorted = [...RAID_DATA].sort((a, b) => {
+        const sa = parseScoreKo(a.score), sb = parseScoreKo(b.score);
+        if (sa === 0 && sb === 0) return 0;
+        if (sa === 0) return 1;
+        if (sb === 0) return -1;
+        return sb - sa;
+      });
+
+      document.getElementById('raid-count').textContent = `총 ${sorted.length}명`;
+
+      let rank = 0;
+      document.getElementById('raid-table-body').innerHTML = sorted.map(d => {
+        const score = parseScoreKo(d.score);
+        const isZero = score === 0;
+        if (!isZero) rank++;
+        const role = roleMap[d.name] || '';
+        const badge = role ? `<span class="px-2 py-0.5 rounded text-xs font-semibold ${ROLE_STYLE[role]}">${role}</span>` : '';
+        const rankCls = rank === 1 ? 'text-yellow-400 font-black' :
+                        rank === 2 ? 'text-slate-300 font-bold'   :
+                        rank === 3 ? 'text-orange-400 font-bold'  : 'text-gray-500';
+        return `
+          <tr class="hover:bg-gray-800/40 transition-colors ${isZero ? 'opacity-40' : ''}">
+            <td class="px-4 py-3 ${rankCls}">${isZero ? '-' : rank}</td>
+            <td class="px-4 py-3 font-medium text-white">${d.name}</td>
+            <td class="px-4 py-3 text-center">${badge}</td>
+            <td class="px-4 py-3 text-right text-gray-400 tabular-nums">${d.power ? formatPower(d.power) : '-'}</td>
+            <td class="px-4 py-3 text-right font-semibold ${isZero ? 'text-gray-600' : 'text-emerald-400'} tabular-nums">${isZero ? '미참여' : d.score}</td>
+          </tr>`;
+      }).join('');
+    }
+
     renderHome();
     renderPower();
     renderCompetition();
     renderTraining();
+    renderRaid();
   </script>
 </body>
 </html>
