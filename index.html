@@ -168,7 +168,7 @@
         <div class="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
           <div>
             <div class="font-semibold text-white text-sm">길드 토벌전 점수</div>
-            <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 효율 = 전투력 대비 점수 (평균 중앙 기준)</div>
+            <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 실압투 = 전투력 대비 예측 점수 초과율</div>
           </div>
           <span class="text-xs text-gray-500" id="raid-count"></span>
         </div>
@@ -178,10 +178,11 @@
               <tr>
                 <th class="px-4 py-3 text-left w-12">순위</th>
                 <th class="px-4 py-3 text-left">닉네임</th>
-                <th class="px-4 py-3 text-center">직위</th>
+                <th class="px-4 py-3 text-center">직업</th>
+                <th class="px-4 py-3 text-center">레벨</th>
                 <th class="px-4 py-3 text-right">전투력</th>
                 <th class="px-4 py-3 text-right">점수</th>
-                <th class="px-4 py-3 text-center min-w-[160px]">효율 (전투력 대비)</th>
+                <th class="px-4 py-3 text-center min-w-[160px]">실압투</th>
               </tr>
             </thead>
             <tbody id="raid-table-body" class="divide-y divide-gray-800"></tbody>
@@ -291,35 +292,35 @@
     ];
 
     const RAID_DATA = [
-      { name: "그린상훈",     power: 3528900000000,  score: "108억3907만"  },
-      { name: "블랙경윤",     power: 4161800000000,  score: "95억6731만"   },
-      { name: "실버정환",     power: 2236700000000,  score: "69억6266만"   },
-      { name: "오렌지완",     power: 1251600000000,  score: "60억4815만"   },
-      { name: "김안셀모",     power: 3193100000000,  score: "65억1191만"   },
-      { name: "지난이야기",   power: 1679000000000,  score: "54억9337만"   },
-      { name: "빠따가2",      power: 6722100000000,  score: "119억7722만"  },
-      { name: "레드웅이",     power: 113740620000,   score: "9억2291만"    },
-      { name: "브라운철",     power: 50504580000,    score: "5억88853만"   },
-      { name: "전설의영포티", power: 480086540000,   score: "14억8648만"   },
-      { name: "하영과돌돌",   power: 1100400000000,  score: "31억3345만"   },
-      { name: "토우르",       power: 347721440000,   score: "24억4540만"   },
-      { name: "냥꾸니",       power: 708932830000,   score: "22억5179만"   },
-      { name: "나로e",        power: 2026300000000,  score: "60억7836만"   },
-      { name: "닼읔낰이트",   power: 1272400000000,  score: "25억3124만"   },
-      { name: "도돍",         power: 1410100000000,  score: "52억1889만"   },
-      { name: "짬뽕에소주",   power: 1012000000000,  score: "33억9868만"   },
-      { name: "가산요소",     power: 872087850000,   score: "30억1133만"   },
-      { name: "구준표춘",     power: 578003680000,   score: "18억5777만"   },
-      { name: "돈키호테바이", power: 211626980000,   score: "9억4408만"    },
-      { name: "은평구돌주먹", power: 1153300000000,  score: "32억3899만"   },
-      { name: "쭈니짜응",     power: 909293890000,   score: "25억8041만"   },
-      { name: "앙끼모륑",     power: 568668990000,   score: "14억4565만"   },
-      { name: "핫딜방문판매", power: 324444870000,   score: "0"            },
-      { name: "몽팡팡",       power: 11525600000,    score: "1억8725만"    },
-      { name: "민우민우민우", power: 2444400000000,  score: "32억3752만"   },
-      { name: "즐똥1",        power: 848896740000,   score: "18억9041만"   },
-      { name: "표뚀",         power: 984974380000,   score: "0"            },
-      { name: "맞수",         power: 875815540000,   score: "0"            },
+      { name: "그린상훈",     job: "신궁",               level: 100, power: 3528900000000,  score: "108억3907만",  silabtoo: "+37.8%" },
+      { name: "블랙경윤",     job: "아크메이지(썬,콜)",  level: 100, power: 4161800000000,  score: "95억6731만",   silabtoo: "+5.6%"  },
+      { name: "실버정환",     job: "섀도어",             level: 100, power: 2236700000000,  score: "69억6266만",   silabtoo: "+28.4%" },
+      { name: "오렌지완",     job: "아크메이지(불,독)",  level: 98,  power: 1251600000000,  score: "60억4815만",   silabtoo: "+69.7%" },
+      { name: "김안셀모",     job: "아크메이지(썬,콜)",  level: 98,  power: 3193100000000,  score: "65억1191만",   silabtoo: "-10.0%" },
+      { name: "지난이야기",   job: "히어로",             level: 98,  power: 1679000000000,  score: "54억9337만",   silabtoo: "+25.7%" },
+      { name: "빠따가2",      job: "신궁",               level: 99,  power: 6722100000000,  score: "119억7722만",  silabtoo: "-13.8%" },
+      { name: "레드웅이",     job: "비숍",               level: 91,  power: 113740620000,   score: "9억2291만",    silabtoo: "-34.7%" },
+      { name: "브라운철",     job: "아크메이지(썬,콜)",  level: 88,  power: 50504580000,    score: "5억88853만",   silabtoo: "+7.3%"  },
+      { name: "전설의영포티", job: "섀도어",             level: 93,  power: 480086540000,   score: "14억8648만",   silabtoo: "-29.4%" },
+      { name: "하영과돌돌",   job: "히어로",             level: 96,  power: 1100400000000,  score: "31억3345만",   silabtoo: "-4.4%"  },
+      { name: "토우르",       job: "신궁",               level: 93,  power: 347721440000,   score: "24억4540만",   silabtoo: "+31.8%" },
+      { name: "냥꾸니",       job: "신궁",               level: 94,  power: 708932830000,   score: "22억5179만",   silabtoo: "-11.3%" },
+      { name: "나로e",        job: "나이트로드",          level: 99,  power: 2026300000000,  score: "60억7836만",   silabtoo: "+20.9%" },
+      { name: "닼읔낰이트",   job: "다크나이트",          level: 96,  power: 1272400000000,  score: "25억3124만",   silabtoo: "-29.7%" },
+      { name: "도돍",         job: "아크메이지(썬,콜)",  level: 96,  power: 1410100000000,  score: "52억1889만",   silabtoo: "+35.1%" },
+      { name: "짬뽕에소주",   job: "히어로",             level: 97,  power: 1012000000000,  score: "33억9868만",   silabtoo: "+9.3%"  },
+      { name: "가산요소",     job: "섀도어",             level: 98,  power: 872087850000,   score: "30억1133만",   silabtoo: "+5.8%"  },
+      { name: "구준표춘",     job: "아크메이지(썬,콜)",  level: 96,  power: 578003680000,   score: "18억5777만",   silabtoo: "-18.9%" },
+      { name: "돈키호테바이", job: "섀도어",             level: 92,  power: 211626980000,   score: "9억4408만",    silabtoo: "-40.9%" },
+      { name: "은평구돌주먹", job: "나이트로드",          level: 97,  power: 1153300000000,  score: "32억3899만",   silabtoo: "-4.1%"  },
+      { name: "쭈니짜응",     job: "섀도어",             level: 97,  power: 909293890000,   score: "25억8041만",   silabtoo: "-11.5%" },
+      { name: "앙끼모륑",     job: "아크메이지(썬,콜)",  level: 94,  power: 568668990000,   score: "14억4565만",   silabtoo: "-36.4%" },
+      { name: "핫딜방문판매", job: "아크메이지(불,독)",  level: 93,  power: 324444870000,   score: "0",            silabtoo: ""       },
+      { name: "몽팡팡",       job: "비숍",               level: 82,  power: 11525600000,    score: "1억8725만",    silabtoo: "-84.7%" },
+      { name: "민우민우민우", job: "섀도어",             level: 98,  power: 2444400000000,  score: "32억3752만",   silabtoo: "-44.3%" },
+      { name: "즐똥1",        job: "아크메이지(썬,콜)",  level: 95,  power: 848896740000,   score: "18억9041만",   silabtoo: "-32.5%" },
+      { name: "표뚀",         job: "나이트로드",          level: 95,  power: 984974380000,   score: "0",            silabtoo: ""       },
+      { name: "맞수",         job: "나이트로드",          level: 96,  power: 875815540000,   score: "0",            silabtoo: ""       },
     ];
 
     // ─────────────────────────────────────────
@@ -498,16 +499,26 @@
     //  길드 토벌전 섹션
     // ─────────────────────────────────────────
     function renderRaid() {
-      const roleMap = Object.fromEntries(POWER_DATA.map(d => [d.name, d.role]));
-
-      // 참여자만으로 효율 계산 (점수 > 0, 전투력 > 0)
       const participants = RAID_DATA.filter(d => parseScoreKo(d.score) > 0 && d.power > 0);
-      const ratios       = participants.map(d => parseScoreKo(d.score) / d.power);
-      const avgRatio     = ratios.reduce((s, r) => s + r, 0) / ratios.length;
-      const maxDev       = Math.max(...ratios.map(r => Math.abs(r - avgRatio)));
+      const avgScore = participants.reduce((s,d)=>s+parseScoreKo(d.score),0) / participants.length;
 
-      const avgScore = participants.reduce((s, d) => s + parseScoreKo(d.score), 0) / participants.length;
-      const avgPower = participants.reduce((s, d) => s + d.power, 0) / participants.length;
+      // 실압투 수치 파싱 ("+37.8%" → 37.8)
+      const silabtooVals = participants.map(d => parseFloat(d.silabtoo) || 0);
+      const maxSilabtoo  = Math.max(...silabtooVals.map(v => Math.abs(v)));
+
+      // R² 계산
+      const xs   = participants.map(d => d.power);
+      const ys   = participants.map(d => parseScoreKo(d.score));
+      const n    = participants.length;
+      const mx   = xs.reduce((a,b)=>a+b,0)/n;
+      const my   = ys.reduce((a,b)=>a+b,0)/n;
+      const cov  = xs.reduce((s,x,i)=>s+(x-mx)*(ys[i]-my),0)/n;
+      const varX = xs.reduce((s,x)=>s+(x-mx)**2,0)/n;
+      const slope  = cov/varX;
+      const intcpt = my - slope*mx;
+      const ssTot  = ys.reduce((s,y)=>s+(y-my)**2,0);
+      const ssRes  = ys.reduce((s,y,i)=>s+(y-(slope*xs[i]+intcpt))**2,0);
+      const r2     = (1 - ssRes/ssTot).toFixed(4);
 
       // 요약 카드
       document.getElementById('raid-stats').innerHTML = `
@@ -521,8 +532,12 @@
           <div class="text-lg font-bold text-emerald-400">${formatPower(Math.round(avgScore))}</div>
         </div>
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
-          <div class="text-gray-500 text-xs mb-2">평균 전투력</div>
-          <div class="text-lg font-bold text-indigo-400">${formatPower(Math.round(avgPower))}</div>
+          <div class="text-gray-500 text-xs mb-2">결정계수 R²</div>
+          <div class="text-lg font-bold text-violet-400 mb-2">${r2}</div>
+          <div class="text-gray-600" style="font-size:0.6rem; line-height:1.5;">
+            실압투 = (실제 - 예측) / 예측 × 100%<br>
+            R² = 1 - SS_res / SS_tot
+          </div>
         </div>`;
 
       // 정렬: 점수 내림차순, 0점 맨 아래
@@ -542,25 +557,19 @@
         const isZero = score === 0;
         if (!isZero) rank++;
 
-        const role  = roleMap[d.name] || '';
-        const badge = role ? `<span class="px-2 py-0.5 rounded text-xs font-semibold ${ROLE_STYLE[role]}">${role}</span>` : '';
         const rankCls = rank === 1 ? 'text-yellow-400 font-black' :
                         rank === 2 ? 'text-slate-300 font-bold'   :
                         rank === 3 ? 'text-orange-400 font-bold'  : 'text-gray-500';
 
-        // 효율 바 계산
+        // 실압투 바 (CSV 값 직접 사용)
         let effBar = `<span class="text-gray-700 text-xs">—</span>`;
-        if (!isZero && d.power > 0) {
-          const ratio   = score / d.power;
-          const dev     = maxDev > 0 ? (ratio - avgRatio) / maxDev : 0; // -1 ~ +1
-          const clipped = Math.max(-1, Math.min(1, dev));
-          const pct     = Math.abs(clipped) * 44; // 최대 44% (여백 6%)
-          const isAbove = clipped >= 0;
-          const pctLabel = ((ratio / avgRatio - 1) * 100).toFixed(0);
-          const sign     = isAbove ? '+' : '';
+        if (!isZero && d.silabtoo) {
+          const val      = parseFloat(d.silabtoo) || 0;
+          const clipped  = maxSilabtoo > 0 ? Math.max(-1, Math.min(1, val / maxSilabtoo)) : 0;
+          const pct      = Math.abs(clipped) * 44;
+          const isAbove  = val >= 0;
           const labelCls = isAbove ? 'text-emerald-400' : 'text-rose-400';
 
-          // 바: 중앙에서 좌/우로 뻗음
           const fillLeft  = isAbove ? '50%' : `${50 - pct}%`;
           const fillWidth = `${pct}%`;
           const fillColor = isAbove ? '#10b981' : '#f43f5e';
@@ -572,7 +581,7 @@
                      style="left:${fillLeft}; width:${fillWidth}; background:${fillColor};"></div>
                 <div class="absolute top-0 h-full w-px bg-gray-500" style="left:50%"></div>
               </div>
-              <span class="text-xs font-semibold tabular-nums ${labelCls} w-10 text-right">${sign}${pctLabel}%</span>
+              <span class="text-xs font-semibold tabular-nums ${labelCls} w-10 text-right">${d.silabtoo}</span>
             </div>`;
         }
 
@@ -580,7 +589,8 @@
           <tr class="hover:bg-gray-800/40 transition-colors ${isZero ? 'opacity-40' : ''}">
             <td class="px-4 py-3 ${rankCls}">${isZero ? '-' : rank}</td>
             <td class="px-4 py-3 font-medium text-white">${d.name}</td>
-            <td class="px-4 py-3 text-center">${badge}</td>
+            <td class="px-4 py-3 text-center text-xs text-gray-400">${d.job}</td>
+            <td class="px-4 py-3 text-center text-gray-300 tabular-nums">${d.level}</td>
             <td class="px-4 py-3 text-right text-gray-400 tabular-nums">${d.power ? formatPower(d.power) : '-'}</td>
             <td class="px-4 py-3 text-right font-semibold ${isZero ? 'text-gray-600' : 'text-emerald-400'} tabular-nums">${isZero ? '미참여' : d.score}</td>
             <td class="px-4 py-3">${effBar}</td>

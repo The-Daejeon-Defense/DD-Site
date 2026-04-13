@@ -90,7 +90,7 @@ def main():
             job, level, power_text = info
             power = parse_power(power_text)
             print(f"  -> 직업:{job} Lv.{level} 전투력:{power_text}")
-            results.append((name, role, level, job, power))
+            results.append((name, role, job, level, power))
         else:
             print(f"  -> 검색 실패")
             results.append((name, role, "", "", "검색 실패"))
@@ -100,7 +100,7 @@ def main():
 
     with open("./data/01_dd_power.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["닉네임", "직위", "레벨", "직업", "전투력"])
+        writer.writerow(["닉네임", "직위", "직업", "레벨", "전투력"])
         writer.writerows(results)
 
     print(f"\n완료! 01_dd_power.csv 저장됨 ({len(results)}건)")
