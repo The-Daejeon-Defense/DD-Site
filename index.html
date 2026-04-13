@@ -73,9 +73,13 @@
         </div>
       </div>
 
-      <!-- TOP 3 -->
+      <!-- 전투력 TOP 3 -->
       <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">전투력 TOP 3</div>
-      <div class="grid grid-cols-3 gap-4" id="top3-cards"></div>
+      <div class="grid grid-cols-3 gap-4 mb-8" id="top3-cards"></div>
+
+      <!-- 전투력 성장 TOP 3 -->
+      <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">전투력 성장 TOP 3</div>
+      <div class="grid grid-cols-3 gap-4" id="growth3-cards"></div>
     </section>
 
     <!-- ───── 멤버 전투력 섹션 ───── -->
@@ -174,35 +178,65 @@
       "손님": "bg-gray-500/20 text-gray-400 border border-gray-600/40",
     };
 
+    // 이전 전투력 (성장 비교용)
+    const PREV_POWER = {
+      "그린상훈":     2968900000000,
+      "블랙경윤":     3661300000000,
+      "실버정환":     2071800000000,
+      "오렌지완":     1181000000000,
+      "김안셀모":     2450900000000,
+      "지난이야기":   1679000000000,
+      "빠따가2":      5050400000000,
+      "레드웅이":     104335990000,
+      "브라운철":     39180130000,
+      "전설의영포티": 397761350000,
+      "하영과돌돌":   1022200000000,
+      "냥꾸니":       663848130000,
+      "토우르":       253832780000,
+      "나로e":        1782000000000,
+      "닼읔낰이트":   1272400000000,
+      "도돍":         1296100000000,
+      "은평구돌주먹": 1032700000000,
+      "짬뽕에소주":   906669110000,
+      "쭈니짜응":     768887670000,
+      "가산요소":     740924490000,
+      "앙끼모륑":     553511730000,
+      "구준표춘":     572659720000,
+      "돈키호테바이": 172895530000,
+      "몽팡팡":       9857800000,
+      "민우민우민우": 2241400000000,
+      "즐똥1":        742004710000,
+    };
+
     const POWER_DATA = [
-      { name: "그린상훈",     role: "길마", level: 99,  job: "신궁",                power: 2968900000000 },
-      { name: "블랙경윤",     role: "점장", level: 100, job: "아크메이지(썬,콜)",   power: 3661300000000 },
-      { name: "실버정환",     role: "점장", level: 99,  job: "섀도어",              power: 2071800000000 },
-      { name: "오렌지완",     role: "직원", level: 98,  job: "아크메이지(불,독)",   power: 1181000000000 },
-      { name: "김안셀모",     role: "직원", level: 98,  job: "아크메이지(썬,콜)",   power: 2450900000000 },
+      { name: "그린상훈",     role: "길마", level: 100, job: "신궁",                power: 3528900000000 },
+      { name: "블랙경윤",     role: "점장", level: 100, job: "아크메이지(썬,콜)",   power: 4161800000000 },
+      { name: "실버정환",     role: "점장", level: 100, job: "섀도어",              power: 2236700000000 },
+      { name: "오렌지완",     role: "직원", level: 98,  job: "아크메이지(불,독)",   power: 1251600000000 },
+      { name: "김안셀모",     role: "직원", level: 98,  job: "아크메이지(썬,콜)",   power: 3193100000000 },
       { name: "지난이야기",   role: "직원", level: 98,  job: "히어로",              power: 1679000000000 },
-      { name: "빠따가2",      role: "직원", level: 99,  job: "신궁",                power: 5050400000000 },
-      { name: "레드웅이",     role: "직원", level: 91,  job: "비숍",                power: 104335990000  },
-      { name: "브라운철",     role: "직원", level: 87,  job: "아크메이지(썬,콜)",   power: 39180130000   },
-      { name: "전설의영포티", role: "직원", level: 93,  job: "섀도어",              power: 397761350000  },
-      { name: "하영과돌돌",   role: "직원", level: 96,  job: "히어로",              power: 1022200000000 },
-      { name: "냥꾸니",       role: "알바", level: 94,  job: "신궁",                power: 663848130000  },
-      { name: "토우르",       role: "손님", level: 93,  job: "신궁",                power: 282587830000  },
-      { name: "나로e",        role: "손님", level: 98,  job: "나이트로드",          power: 1782000000000 },
+      { name: "빠따가2",      role: "직원", level: 99,  job: "신궁",                power: 6722100000000 },
+      { name: "레드웅이",     role: "직원", level: 91,  job: "비숍",                power: 113740620000  },
+      { name: "브라운철",     role: "직원", level: 88,  job: "아크메이지(썬,콜)",   power: 50504580000   },
+      { name: "전설의영포티", role: "직원", level: 93,  job: "섀도어",              power: 480086540000  },
+      { name: "하영과돌돌",   role: "직원", level: 96,  job: "히어로",              power: 1100400000000 },
+      { name: "냥꾸니",       role: "알바", level: 94,  job: "신궁",                power: 708932830000  },
+      { name: "토우르",       role: "손님", level: 93,  job: "신궁",                power: 347721440000  },
+      { name: "나로e",        role: "손님", level: 99,  job: "나이트로드",          power: 2026300000000 },
       { name: "닼읔낰이트",   role: "손님", level: 96,  job: "다크나이트",          power: 1272400000000 },
-      { name: "도돍",         role: "손님", level: 95,  job: "아크메이지(썬,콜)",   power: 1296100000000 },
-      { name: "은평구돌주먹", role: "손님", level: 96,  job: "나이트로드",          power: 1032700000000 },
-      { name: "푸우임",       role: "손님", level: 96,  job: "섀도어",              power: 656186920000  },
-      { name: "짬뽕에소주",   role: "손님", level: 97,  job: "히어로",              power: 906669110000  },
-      { name: "쭈니짜응",     role: "손님", level: 96,  job: "섀도어",              power: 768887670000  },
-      { name: "가산요소",     role: "손님", level: 97,  job: "섀도어",              power: 740924490000  },
-      { name: "앙끼모륑",     role: "손님", level: 94,  job: "아크메이지(썬,콜)",   power: 553511730000  },
-      { name: "구준표춘",     role: "손님", level: 96,  job: "아크메이지(썬,콜)",   power: 572659720000  },
-      { name: "핫딜방문판매", role: "손님", level: 93,  job: "아크메이지(불,독)",   power: 318387210000  },
-      { name: "돈키호테바이", role: "손님", level: 92,  job: "섀도어",              power: 175111940000  },
-      { name: "몽팡팡",       role: "손님", level: 82,  job: "비숍",                power: 9857800000    },
-      { name: "민우민우민우", role: "손님", level: 98,  job: "섀도어",              power: 2241400000000 },
-      { name: "즐똥1",        role: "손님", level: 95,  job: "아크메이지(썬,콜)",   power: 742004710000  },
+      { name: "도돍",         role: "손님", level: 96,  job: "아크메이지(썬,콜)",   power: 1410100000000 },
+      { name: "은평구돌주먹", role: "손님", level: 97,  job: "나이트로드",          power: 1153300000000 },
+      { name: "짬뽕에소주",   role: "손님", level: 97,  job: "히어로",              power: 1012000000000 },
+      { name: "쭈니짜응",     role: "손님", level: 97,  job: "섀도어",              power: 909293890000  },
+      { name: "가산요소",     role: "손님", level: 98,  job: "섀도어",              power: 872087850000  },
+      { name: "앙끼모륑",     role: "손님", level: 94,  job: "아크메이지(썬,콜)",   power: 568668990000  },
+      { name: "구준표춘",     role: "손님", level: 96,  job: "아크메이지(썬,콜)",   power: 578003680000  },
+      { name: "돈키호테바이", role: "손님", level: 92,  job: "섀도어",              power: 211626980000  },
+      { name: "몽팡팡",       role: "손님", level: 82,  job: "비숍",                power: 11525600000   },
+      { name: "민우민우민우", role: "손님", level: 98,  job: "섀도어",              power: 2444400000000 },
+      { name: "즐똥1",        role: "손님", level: 95,  job: "아크메이지(썬,콜)",   power: 848896740000  },
+      { name: "표뚀",         role: "손님", level: 95,  job: "나이트로드",          power: 984974380000  },
+      { name: "맞수",         role: "손님", level: 96,  job: "나이트로드",          power: 875815540000  },
     ];
 
     const COMPETITION_DATA = [
@@ -280,6 +314,28 @@
           <div class="font-black text-white text-base">${d.name}</div>
           <div class="text-xs text-gray-400 mt-1">${d.job} · Lv.${d.level}</div>
           <div class="text-sm mt-1 opacity-80">${formatPower(d.power)}</div>
+        </div>
+      `).join('');
+
+      // 성장 TOP 3 (이전 데이터 있는 멤버만)
+      const growthList = POWER_DATA
+        .filter(d => PREV_POWER[d.name] !== undefined)
+        .map(d => ({ ...d, growth: d.power - PREV_POWER[d.name] }))
+        .sort((a, b) => b.growth - a.growth)
+        .slice(0, 3);
+
+      const growthStyles = [
+        'from-emerald-900/40 border-emerald-500/40',
+        'from-teal-900/30 border-teal-600/40',
+        'from-cyan-900/30 border-cyan-600/40',
+      ];
+      document.getElementById('growth3-cards').innerHTML = growthList.map((d, i) => `
+        <div class="bg-gradient-to-br ${growthStyles[i]} border rounded-xl p-5">
+          <div class="text-xl font-black text-emerald-400 mb-2">${i + 1}위</div>
+          <div class="font-black text-white text-base">${d.name}</div>
+          <div class="text-xs text-gray-400 mt-1">${d.job} · Lv.${d.level}</div>
+          <div class="text-emerald-400 font-bold text-sm mt-2">+${formatPower(d.growth)}</div>
+          <div class="text-xs text-gray-500 mt-0.5">${formatPower(PREV_POWER[d.name])} → ${formatPower(d.power)}</div>
         </div>
       `).join('');
     }
