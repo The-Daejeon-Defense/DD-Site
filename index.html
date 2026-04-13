@@ -161,11 +161,14 @@
 
     <!-- ───── 길드 토벌전 섹션 ───── -->
     <section id="section-raid" class="hidden">
+      <!-- 요약 카드 -->
+      <div class="grid grid-cols-3 gap-4 mb-6" id="raid-stats"></div>
+
       <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
         <div class="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
           <div>
             <div class="font-semibold text-white text-sm">길드 토벌전 점수</div>
-            <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순</div>
+            <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 효율 = 전투력 대비 점수 (평균 중앙 기준)</div>
           </div>
           <span class="text-xs text-gray-500" id="raid-count"></span>
         </div>
@@ -178,6 +181,7 @@
                 <th class="px-4 py-3 text-center">직위</th>
                 <th class="px-4 py-3 text-right">전투력</th>
                 <th class="px-4 py-3 text-right">점수</th>
+                <th class="px-4 py-3 text-center min-w-[160px]">효율 (전투력 대비)</th>
               </tr>
             </thead>
             <tbody id="raid-table-body" class="divide-y divide-gray-800"></tbody>
@@ -494,8 +498,34 @@
     //  길드 토벌전 섹션
     // ─────────────────────────────────────────
     function renderRaid() {
-      // 점수 기준 내림차순, 0점은 맨 아래
       const roleMap = Object.fromEntries(POWER_DATA.map(d => [d.name, d.role]));
+
+      // 참여자만으로 효율 계산 (점수 > 0, 전투력 > 0)
+      const participants = RAID_DATA.filter(d => parseScoreKo(d.score) > 0 && d.power > 0);
+      const ratios       = participants.map(d => parseScoreKo(d.score) / d.power);
+      const avgRatio     = ratios.reduce((s, r) => s + r, 0) / ratios.length;
+      const maxDev       = Math.max(...ratios.map(r => Math.abs(r - avgRatio)));
+
+      const avgScore = participants.reduce((s, d) => s + parseScoreKo(d.score), 0) / participants.length;
+      const avgPower = participants.reduce((s, d) => s + d.power, 0) / participants.length;
+
+      // 요약 카드
+      document.getElementById('raid-stats').innerHTML = `
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">참여 인원</div>
+          <div class="text-2xl font-bold text-white">${participants.length}명</div>
+          <div class="text-xs text-gray-600 mt-1">미참여 ${RAID_DATA.length - participants.length}명</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">평균 점수</div>
+          <div class="text-lg font-bold text-emerald-400">${formatPower(Math.round(avgScore))}</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">평균 전투력</div>
+          <div class="text-lg font-bold text-indigo-400">${formatPower(Math.round(avgPower))}</div>
+        </div>`;
+
+      // 정렬: 점수 내림차순, 0점 맨 아래
       const sorted = [...RAID_DATA].sort((a, b) => {
         const sa = parseScoreKo(a.score), sb = parseScoreKo(b.score);
         if (sa === 0 && sb === 0) return 0;
@@ -508,14 +538,44 @@
 
       let rank = 0;
       document.getElementById('raid-table-body').innerHTML = sorted.map(d => {
-        const score = parseScoreKo(d.score);
+        const score  = parseScoreKo(d.score);
         const isZero = score === 0;
         if (!isZero) rank++;
-        const role = roleMap[d.name] || '';
+
+        const role  = roleMap[d.name] || '';
         const badge = role ? `<span class="px-2 py-0.5 rounded text-xs font-semibold ${ROLE_STYLE[role]}">${role}</span>` : '';
         const rankCls = rank === 1 ? 'text-yellow-400 font-black' :
                         rank === 2 ? 'text-slate-300 font-bold'   :
                         rank === 3 ? 'text-orange-400 font-bold'  : 'text-gray-500';
+
+        // 효율 바 계산
+        let effBar = `<span class="text-gray-700 text-xs">—</span>`;
+        if (!isZero && d.power > 0) {
+          const ratio   = score / d.power;
+          const dev     = maxDev > 0 ? (ratio - avgRatio) / maxDev : 0; // -1 ~ +1
+          const clipped = Math.max(-1, Math.min(1, dev));
+          const pct     = Math.abs(clipped) * 44; // 최대 44% (여백 6%)
+          const isAbove = clipped >= 0;
+          const pctLabel = ((ratio / avgRatio - 1) * 100).toFixed(0);
+          const sign     = isAbove ? '+' : '';
+          const labelCls = isAbove ? 'text-emerald-400' : 'text-rose-400';
+
+          // 바: 중앙에서 좌/우로 뻗음
+          const fillLeft  = isAbove ? '50%' : `${50 - pct}%`;
+          const fillWidth = `${pct}%`;
+          const fillColor = isAbove ? '#10b981' : '#f43f5e';
+
+          effBar = `
+            <div class="flex items-center gap-2 justify-center">
+              <div class="relative w-28 h-2 bg-gray-800 rounded overflow-hidden flex-shrink-0">
+                <div class="absolute top-0 h-full rounded"
+                     style="left:${fillLeft}; width:${fillWidth}; background:${fillColor};"></div>
+                <div class="absolute top-0 h-full w-px bg-gray-500" style="left:50%"></div>
+              </div>
+              <span class="text-xs font-semibold tabular-nums ${labelCls} w-10 text-right">${sign}${pctLabel}%</span>
+            </div>`;
+        }
+
         return `
           <tr class="hover:bg-gray-800/40 transition-colors ${isZero ? 'opacity-40' : ''}">
             <td class="px-4 py-3 ${rankCls}">${isZero ? '-' : rank}</td>
@@ -523,6 +583,7 @@
             <td class="px-4 py-3 text-center">${badge}</td>
             <td class="px-4 py-3 text-right text-gray-400 tabular-nums">${d.power ? formatPower(d.power) : '-'}</td>
             <td class="px-4 py-3 text-right font-semibold ${isZero ? 'text-gray-600' : 'text-emerald-400'} tabular-nums">${isZero ? '미참여' : d.score}</td>
+            <td class="px-4 py-3">${effBar}</td>
           </tr>`;
       }).join('');
     }
