@@ -49,17 +49,19 @@ def calc_regression(data):
     return slope, intcpt, r2
 
 
-def calc_silabtoo(score_val, power, slope, intcpt):
+def calc_predicted_and_silabtoo(score_val, power, slope, intcpt):
     """
+    예측점수와 실압투(%) 반환.
+    미참여 또는 전투력 0이면 (0, None) 반환.
     실압투(%) = (실제 점수 - 예측 점수) / 예측 점수 × 100
-    미참여 또는 전투력 0이면 None 반환
     """
     if score_val == 0 or power == 0:
-        return None
+        return 0, None
     predicted = slope * power + intcpt
     if predicted <= 0:
-        return None
-    return (score_val - predicted) / predicted * 100
+        return 0, None
+    silabtoo = (score_val - predicted) / predicted * 100
+    return round(predicted), silabtoo
 
 
 def main():
@@ -110,25 +112,26 @@ def main():
     print(f'  R²        = {r2:.4f}')
     print()
 
-    # ── 실압투 계산 및 출력 데이터 구성 ───────────
+    # ── 실압투 / 예측점수 계산 및 출력 데이터 구성 ─
     results = []
     for d in merged:
-        silabtoo = calc_silabtoo(d['score_val'], d['power'], slope, intcpt)
+        predicted, silabtoo = calc_predicted_and_silabtoo(d['score_val'], d['power'], slope, intcpt)
         silabtoo_str = f'{silabtoo:+.1f}%' if silabtoo is not None else ''
         results.append({
-            '닉네임': d['닉네임'],
-            '직업':   d['직업'],
-            '레벨':   d['레벨'],
-            '전투력': d['전투력'],
-            '점수':   d['점수'],
-            '실압투': silabtoo_str,
+            '닉네임':   d['닉네임'],
+            '직업':     d['직업'],
+            '레벨':     d['레벨'],
+            '전투력':   d['전투력'],
+            '점수':     d['점수'],
+            '예측점수': predicted,
+            '실압투':   silabtoo_str,
         })
 
         status = f"실압투:{silabtoo_str}" if silabtoo_str else '미참여'
         print(f"  {d['닉네임']:<14} 점수:{d['점수']:<12} {status}")
 
     # ── 02_dd_raid_out.csv 저장 ───────────────────
-    fieldnames = ['닉네임', '직업', '레벨', '전투력', '점수', '실압투']
+    fieldnames = ['닉네임', '직업', '레벨', '전투력', '점수', '예측점수', '실압투']
     with open('./data/02_dd_raid_out.csv', 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
