@@ -9,4 +9,7 @@ wheels/
 # Virtual environments
 .venv
 
+# Claude code environment
+.claude
+
 # User specific files
