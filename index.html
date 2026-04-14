@@ -140,6 +140,38 @@
 
     <!-- ───── 길드 수련장 섹션 ───── -->
     <section id="section-training" class="hidden">
+      <!-- 멤버 점수 요약 카드 -->
+      <div class="grid grid-cols-3 gap-4 mb-6" id="training-center-stats"></div>
+
+      <!-- 멤버 점수 테이블 -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-6">
+        <div class="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+          <div>
+            <div class="font-semibold text-white text-sm">길드 수련장 점수</div>
+            <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 실압투 = 전투력 대비 예측 점수 초과율</div>
+          </div>
+          <span class="text-xs text-gray-500" id="training-center-count"></span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
+              <tr>
+                <th class="px-4 py-3 text-left w-12">순위</th>
+                <th class="px-4 py-3 text-left">닉네임</th>
+                <th class="px-4 py-3 text-center">직업</th>
+                <th class="px-4 py-3 text-center">레벨</th>
+                <th class="px-4 py-3 text-right">전투력</th>
+                <th class="px-4 py-3 text-right">점수</th>
+                <th class="px-4 py-3 text-right">예측점수</th>
+                <th class="px-4 py-3 text-center min-w-[160px]">실압투</th>
+              </tr>
+            </thead>
+            <tbody id="training-center-table-body" class="divide-y divide-gray-800"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 길드 순위 테이블 -->
       <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
         <div class="px-4 py-3 border-b border-gray-800">
           <div class="font-semibold text-white text-sm">길드 수련장 현황</div>
@@ -309,6 +341,38 @@
       { name: "즐똥1",        job: "아크메이지(썬,콜)",  level: 95,  power:  848896740000, score:          0,  predicted:          0,  silabtoo: ""       },
       { name: "표뚀",         job: "나이트로드",          level: 95,  power:  984974380000, score:          0,  predicted:          0,  silabtoo: ""       },
       { name: "맞수",         job: "나이트로드",          level: 96,  power:  875815540000, score:          0,  predicted:          0,  silabtoo: ""       },
+    ];
+
+    const TRAINING_CENTER_DATA = [
+      { name: "빠따가2",       job: "신궁",               level: 99,  power: 6722100000000,  score: 5093025, predicted: 5300877, silabtoo: "-3.9%"  },
+      { name: "블랙경윤",       job: "아크메이지(썬,콜)",   level: 100, power: 4161800000000,  score: 4026165, predicted: 3592704, silabtoo: "+12.1%" },
+      { name: "그린상훈",       job: "신궁",               level: 100, power: 3528900000000,  score: 3414468, predicted: 3170448, silabtoo: "+7.7%"  },
+      { name: "김안셀모",       job: "아크메이지(썬,콜)",   level: 98,  power: 3193100000000,  score: 2944581, predicted: 2946410, silabtoo: "-0.1%"  },
+      { name: "오렌지완",       job: "아크메이지(불,독)",   level: 98,  power: 1251600000000,  score: 2830929, predicted: 1651086, silabtoo: "+71.5%" },
+      { name: "실버정환",       job: "섀도어",              level: 100, power: 2236700000000,  score: 2644353, predicted: 2308322, silabtoo: "+14.6%" },
+      { name: "은평구돌주먹",   job: "나이트로드",           level: 97,  power: 1153300000000,  score: 2336577, predicted: 1585503, silabtoo: "+47.4%" },
+      { name: "도돍",           job: "아크메이지(썬,콜)",   level: 96,  power: 1410100000000,  score: 2083350, predicted: 1756834, silabtoo: "+18.6%" },
+      { name: "나로e",          job: "나이트로드",           level: 99,  power: 2026300000000,  score: 2073678, predicted: 2167948, silabtoo: "-4.3%"  },
+      { name: "닼읔낰이트",     job: "다크나이트",           level: 96,  power: 1272400000000,  score: 1606308, predicted: 1664963, silabtoo: "-3.5%"  },
+      { name: "하영과돌돌",     job: "히어로",              level: 96,  power: 1100400000000,  score: 1540953, predicted: 1550209, silabtoo: "-0.6%"  },
+      { name: "쭈니짜응",       job: "섀도어",              level: 97,  power:  909293890000,  score: 1538064, predicted: 1422707, silabtoo: "+8.1%"  },
+      { name: "가산요소",       job: "섀도어",              level: 98,  power:  872087850000,  score: 1501092, predicted: 1397884, silabtoo: "+7.4%"  },
+      { name: "토우르",         job: "신궁",               level: 93,  power:  347721440000,  score: 1401417, predicted: 1048039, silabtoo: "+33.7%" },
+      { name: "지난이야기",     job: "히어로",              level: 98,  power: 1679000000000,  score: 1352292, predicted: 1936237, silabtoo: "-30.2%" },
+      { name: "냥꾸니",         job: "신궁",               level: 94,  power:  708932830000,  score: 1311351, predicted: 1289031, silabtoo: "+1.7%"  },
+      { name: "구준표춘",       job: "아크메이지(썬,콜)",   level: 96,  power:  578003680000,  score: 1302021, predicted: 1201678, silabtoo: "+8.4%"  },
+      { name: "즐똥1",          job: "아크메이지(썬,콜)",   level: 95,  power:  848896740000,  score: 1292703, predicted: 1382412, silabtoo: "-6.5%"  },
+      { name: "민우민우민우",   job: "섀도어",              level: 98,  power: 2444400000000,  score: 1065756, predicted: 2446895, silabtoo: "-56.4%" },
+      { name: "레드웅이",       job: "비숍",               level: 91,  power:  113740620000,  score: 1034106, predicted:  891933, silabtoo: "+15.9%" },
+      { name: "앙끼모륑",       job: "아크메이지(썬,콜)",   level: 94,  power:  568668990000,  score:  923868, predicted: 1195450, silabtoo: "-22.7%" },
+      { name: "브라운철",       job: "아크메이지(썬,콜)",   level: 88,  power:   50504580000,  score:  649644, predicted:  849743, silabtoo: "-23.5%" },
+      { name: "전설의영포티",   job: "섀도어",              level: 93,  power:  480086540000,  score:  590580, predicted: 1136350, silabtoo: "-48.0%" },
+      { name: "몽팡팡",         job: "비숍",               level: 82,  power:   11525600000,  score:  570171, predicted:  823737, silabtoo: "-30.8%" },
+      { name: "돈키호테바이",   job: "섀도어",              level: 92,  power:  211626980000,  score:  547188, predicted:  957240, silabtoo: "-42.8%" },
+      { name: "짬뽕에소주",     job: "히어로",              level: 97,  power: 1012000000000,  score:       0, predicted:       0, silabtoo: ""       },
+      { name: "핫딜방문판매",   job: "아크메이지(불,독)",   level: 93,  power:  324444870000,  score:       0, predicted:       0, silabtoo: ""       },
+      { name: "표뚀",           job: "나이트로드",           level: 95,  power:  984974380000,  score:       0, predicted:       0, silabtoo: ""       },
+      { name: "맞수",           job: "나이트로드",           level: 96,  power:  875815540000,  score:       0, predicted:       0, silabtoo: ""       },
     ];
 
     const TRAINING_DATA = [
@@ -586,6 +650,106 @@
     }
 
     // ─────────────────────────────────────────
+    //  수련장 점수 포매터
+    // ─────────────────────────────────────────
+    function formatTrainingScore(n) {
+      if (!n) return '0';
+      const man = Math.floor(n / 10_000);
+      const rem = n % 10_000;
+      if (man > 0 && rem > 0) return `${man}만${rem}`;
+      if (man > 0) return `${man}만`;
+      return `${n}`;
+    }
+
+    // ─────────────────────────────────────────
+    //  길드 수련장 멤버 점수 섹션
+    // ─────────────────────────────────────────
+    function renderTrainingCenter() {
+      const participants = TRAINING_CENTER_DATA.filter(d => d.score > 0);
+      const avgScore     = participants.reduce((s, d) => s + d.score, 0) / participants.length;
+      const avgPredicted = participants.reduce((s, d) => s + d.predicted, 0) / participants.length;
+
+      const silabtooVals = participants.map(d => parseFloat(d.silabtoo) || 0);
+      const maxSilabtoo  = Math.max(...silabtooVals.map(v => Math.abs(v)));
+
+      const ys    = participants.map(d => d.score);
+      const n     = participants.length;
+      const my    = ys.reduce((a, b) => a + b, 0) / n;
+      const ssTot = ys.reduce((s, y) => s + (y - my) ** 2, 0);
+      const ssRes = participants.reduce((s, d) => s + (d.score - d.predicted) ** 2, 0);
+      const r2    = (1 - ssRes / ssTot).toFixed(4);
+
+      document.getElementById('training-center-stats').innerHTML = `
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">참여 인원</div>
+          <div class="text-2xl font-bold text-white">${participants.length}명</div>
+          <div class="text-xs text-gray-600 mt-1">미참여 ${TRAINING_CENTER_DATA.length - participants.length}명</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">평균 점수</div>
+          <div class="text-lg font-bold text-emerald-400">${formatTrainingScore(Math.round(avgScore))}</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div class="text-gray-500 text-xs mb-2">평균 예측점수</div>
+          <div class="text-lg font-bold text-violet-400">${formatTrainingScore(Math.round(avgPredicted))}</div>
+          <div class="text-xs text-gray-600 mt-1">R² = ${r2}</div>
+        </div>`;
+
+      const sorted = [...TRAINING_CENTER_DATA].sort((a, b) => {
+        if (a.score === 0 && b.score === 0) return 0;
+        if (a.score === 0) return 1;
+        if (b.score === 0) return -1;
+        return b.score - a.score;
+      });
+
+      document.getElementById('training-center-count').textContent = `총 ${sorted.length}명`;
+
+      let rank = 0;
+      document.getElementById('training-center-table-body').innerHTML = sorted.map(d => {
+        const isZero = d.score === 0;
+        if (!isZero) rank++;
+
+        const rankCls = rank === 1 ? 'text-yellow-400 font-black' :
+                        rank === 2 ? 'text-slate-300 font-bold'   :
+                        rank === 3 ? 'text-orange-400 font-bold'  : 'text-gray-500';
+
+        let effBar = `<span class="text-gray-700 text-xs">—</span>`;
+        if (!isZero && d.silabtoo) {
+          const val      = parseFloat(d.silabtoo) || 0;
+          const clipped  = maxSilabtoo > 0 ? Math.max(-1, Math.min(1, val / maxSilabtoo)) : 0;
+          const pct      = Math.abs(clipped) * 44;
+          const isAbove  = val >= 0;
+          const labelCls = isAbove ? 'text-emerald-400' : 'text-rose-400';
+          const fillLeft  = isAbove ? '50%' : `${50 - pct}%`;
+          const fillWidth = `${pct}%`;
+          const fillColor = isAbove ? '#10b981' : '#f43f5e';
+
+          effBar = `
+            <div class="flex items-center gap-2 justify-center">
+              <div class="relative w-28 h-2 bg-gray-800 rounded overflow-hidden flex-shrink-0">
+                <div class="absolute top-0 h-full rounded"
+                     style="left:${fillLeft}; width:${fillWidth}; background:${fillColor};"></div>
+                <div class="absolute top-0 h-full w-px bg-gray-500" style="left:50%"></div>
+              </div>
+              <span class="text-xs font-semibold tabular-nums ${labelCls} w-10 text-right">${d.silabtoo}</span>
+            </div>`;
+        }
+
+        return `
+          <tr class="hover:bg-gray-800/40 transition-colors ${isZero ? 'opacity-40' : ''}">
+            <td class="px-4 py-3 ${rankCls}">${isZero ? '-' : rank}</td>
+            <td class="px-4 py-3 font-medium text-white">${d.name}</td>
+            <td class="px-4 py-3 text-center text-xs text-gray-400">${d.job}</td>
+            <td class="px-4 py-3 text-center text-gray-300 tabular-nums">${d.level}</td>
+            <td class="px-4 py-3 text-right text-gray-400 tabular-nums">${formatPower(d.power)}</td>
+            <td class="px-4 py-3 text-right font-semibold ${isZero ? 'text-gray-600' : 'text-emerald-400'} tabular-nums">${isZero ? '미참여' : formatTrainingScore(d.score)}</td>
+            <td class="px-4 py-3 text-right text-gray-500 tabular-nums">${isZero ? '-' : formatTrainingScore(d.predicted)}</td>
+            <td class="px-4 py-3">${effBar}</td>
+          </tr>`;
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
     //  초기화
     // ─────────────────────────────────────────
     // ─────────────────────────────────────────
@@ -687,6 +851,7 @@
     renderHome();
     renderPower();
     renderCompetition();
+    renderTrainingCenter();
     renderTraining();
     renderRaid();
   </script>
