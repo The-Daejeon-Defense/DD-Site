@@ -116,7 +116,11 @@
             <div class="font-semibold text-white text-sm">길드 대항전 점수</div>
             <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 실압투 = 전투력 대비 예측 점수 초과율</div>
           </div>
-          <span class="text-xs text-gray-500" id="competition-count"></span>
+          <div class="flex items-center gap-3">
+            <select id="competition-date-select" onchange="loadCompetition(this.value)"
+                    class="bg-gray-800 text-gray-300 text-xs border border-gray-700 rounded px-2 py-1 cursor-pointer"></select>
+            <span class="text-xs text-gray-500" id="competition-count"></span>
+          </div>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
@@ -150,7 +154,11 @@
             <div class="font-semibold text-white text-sm">길드 수련장 점수</div>
             <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 실압투 = 전투력 대비 예측 점수 초과율</div>
           </div>
-          <span class="text-xs text-gray-500" id="training-center-count"></span>
+          <div class="flex items-center gap-3">
+            <select id="training-date-select" onchange="loadTraining(this.value)"
+                    class="bg-gray-800 text-gray-300 text-xs border border-gray-700 rounded px-2 py-1 cursor-pointer"></select>
+            <span class="text-xs text-gray-500" id="training-center-count"></span>
+          </div>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
@@ -183,7 +191,11 @@
             <div class="font-semibold text-white text-sm">길드 토벌전 점수</div>
             <div class="text-xs text-gray-500 mt-0.5">점수 기준 내림차순 · 실압투 = 전투력 대비 예측 점수 초과율</div>
           </div>
-          <span class="text-xs text-gray-500" id="raid-count"></span>
+          <div class="flex items-center gap-3">
+            <select id="raid-date-select" onchange="loadRaid(this.value)"
+                    class="bg-gray-800 text-gray-300 text-xs border border-gray-700 rounded px-2 py-1 cursor-pointer"></select>
+            <span class="text-xs text-gray-500" id="raid-count"></span>
+          </div>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">

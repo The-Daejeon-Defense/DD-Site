@@ -1,0 +1,270 @@
+{
+  "dates": [
+    "2026-04-13"
+  ],
+  "records": {
+    "2026-04-13": [
+      {
+        "name": "가산요소",
+        "job": "섀도어",
+        "level": 98,
+        "power": 872087850000,
+        "score": 1501092,
+        "predicted": 1397884,
+        "silabtoo": "+7.4%"
+      },
+      {
+        "name": "구준표춘",
+        "job": "아크메이지(썬,콜)",
+        "level": 96,
+        "power": 578003680000,
+        "score": 1302021,
+        "predicted": 1201678,
+        "silabtoo": "+8.4%"
+      },
+      {
+        "name": "그린상훈",
+        "job": "신궁",
+        "level": 100,
+        "power": 3528900000000,
+        "score": 3414468,
+        "predicted": 3170448,
+        "silabtoo": "+7.7%"
+      },
+      {
+        "name": "김안셀모",
+        "job": "아크메이지(썬,콜)",
+        "level": 98,
+        "power": 3193100000000,
+        "score": 2944581,
+        "predicted": 2946410,
+        "silabtoo": "-0.1%"
+      },
+      {
+        "name": "나로e",
+        "job": "나이트로드",
+        "level": 99,
+        "power": 2026300000000,
+        "score": 2073678,
+        "predicted": 2167948,
+        "silabtoo": "-4.3%"
+      },
+      {
+        "name": "냥꾸니",
+        "job": "신궁",
+        "level": 94,
+        "power": 708932830000,
+        "score": 1311351,
+        "predicted": 1289031,
+        "silabtoo": "+1.7%"
+      },
+      {
+        "name": "닼읔낰이트",
+        "job": "다크나이트",
+        "level": 96,
+        "power": 1272400000000,
+        "score": 1606308,
+        "predicted": 1664963,
+        "silabtoo": "-3.5%"
+      },
+      {
+        "name": "도돍",
+        "job": "아크메이지(썬,콜)",
+        "level": 96,
+        "power": 1410100000000,
+        "score": 2083350,
+        "predicted": 1756834,
+        "silabtoo": "+18.6%"
+      },
+      {
+        "name": "돈키호테바이",
+        "job": "섀도어",
+        "level": 92,
+        "power": 211626980000,
+        "score": 547188,
+        "predicted": 957240,
+        "silabtoo": "-42.8%"
+      },
+      {
+        "name": "레드웅이",
+        "job": "비숍",
+        "level": 91,
+        "power": 113740620000,
+        "score": 1034106,
+        "predicted": 891933,
+        "silabtoo": "+15.9%"
+      },
+      {
+        "name": "맞수",
+        "job": "나이트로드",
+        "level": 96,
+        "power": 875815540000,
+        "score": 0,
+        "predicted": 0,
+        "silabtoo": ""
+      },
+      {
+        "name": "몽팡팡",
+        "job": "비숍",
+        "level": 82,
+        "power": 11525600000,
+        "score": 570171,
+        "predicted": 823737,
+        "silabtoo": "-30.8%"
+      },
+      {
+        "name": "민우민우민우",
+        "job": "섀도어",
+        "level": 98,
+        "power": 2444400000000,
+        "score": 1065756,
+        "predicted": 2446895,
+        "silabtoo": "-56.4%"
+      },
+      {
+        "name": "브라운철",
+        "job": "아크메이지(썬,콜)",
+        "level": 88,
+        "power": 50504580000,
+        "score": 649644,
+        "predicted": 849743,
+        "silabtoo": "-23.5%"
+      },
+      {
+        "name": "블랙경윤",
+        "job": "아크메이지(썬,콜)",
+        "level": 100,
+        "power": 4161800000000,
+        "score": 4026165,
+        "predicted": 3592704,
+        "silabtoo": "+12.1%"
+      },
+      {
+        "name": "빠따가2",
+        "job": "신궁",
+        "level": 99,
+        "power": 6722100000000,
+        "score": 5093025,
+        "predicted": 5300877,
+        "silabtoo": "-3.9%"
+      },
+      {
+        "name": "실버정환",
+        "job": "섀도어",
+        "level": 100,
+        "power": 2236700000000,
+        "score": 2644353,
+        "predicted": 2308322,
+        "silabtoo": "+14.6%"
+      },
+      {
+        "name": "앙끼모륑",
+        "job": "아크메이지(썬,콜)",
+        "level": 94,
+        "power": 568668990000,
+        "score": 923868,
+        "predicted": 1195450,
+        "silabtoo": "-22.7%"
+      },
+      {
+        "name": "오렌지완",
+        "job": "아크메이지(불,독)",
+        "level": 98,
+        "power": 1251600000000,
+        "score": 2830929,
+        "predicted": 1651086,
+        "silabtoo": "+71.5%"
+      },
+      {
+        "name": "은평구돌주먹",
+        "job": "나이트로드",
+        "level": 97,
+        "power": 1153300000000,
+        "score": 2336577,
+        "predicted": 1585503,
+        "silabtoo": "+47.4%"
+      },
+      {
+        "name": "전설의영포티",
+        "job": "섀도어",
+        "level": 93,
+        "power": 480086540000,
+        "score": 590580,
+        "predicted": 1136350,
+        "silabtoo": "-48.0%"
+      },
+      {
+        "name": "즐똥1",
+        "job": "아크메이지(썬,콜)",
+        "level": 95,
+        "power": 848896740000,
+        "score": 1292703,
+        "predicted": 1382412,
+        "silabtoo": "-6.5%"
+      },
+      {
+        "name": "지난이야기",
+        "job": "히어로",
+        "level": 98,
+        "power": 1679000000000,
+        "score": 1352292,
+        "predicted": 1936237,
+        "silabtoo": "-30.2%"
+      },
+      {
+        "name": "짬뽕에소주",
+        "job": "히어로",
+        "level": 97,
+        "power": 1012000000000,
+        "score": 0,
+        "predicted": 0,
+        "silabtoo": ""
+      },
+      {
+        "name": "쭈니짜응",
+        "job": "섀도어",
+        "level": 97,
+        "power": 909293890000,
+        "score": 1538064,
+        "predicted": 1422707,
+        "silabtoo": "+8.1%"
+      },
+      {
+        "name": "토우르",
+        "job": "신궁",
+        "level": 93,
+        "power": 347721440000,
+        "score": 1401417,
+        "predicted": 1048039,
+        "silabtoo": "+33.7%"
+      },
+      {
+        "name": "표뚀",
+        "job": "나이트로드",
+        "level": 95,
+        "power": 984974380000,
+        "score": 0,
+        "predicted": 0,
+        "silabtoo": ""
+      },
+      {
+        "name": "하영과돌돌",
+        "job": "히어로",
+        "level": 96,
+        "power": 1100400000000,
+        "score": 1540953,
+        "predicted": 1550209,
+        "silabtoo": "-0.6%"
+      },
+      {
+        "name": "핫딜방문판매",
+        "job": "아크메이지(불,독)",
+        "level": 93,
+        "power": 324444870000,
+        "score": 0,
+        "predicted": 0,
+        "silabtoo": ""
+      }
+    ]
+  }
+}

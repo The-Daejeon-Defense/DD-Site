@@ -1,5 +1,7 @@
+import argparse
 import csv
 import re
+import json_store
 
 
 def parse_score(text):
@@ -64,17 +66,17 @@ def calc_predicted_and_silabtoo(score_val, power, slope, intcpt):
     return round(predicted), silabtoo
 
 
-def main():
-    # ── 01_dd_power.csv 읽기 ─────────────────────
+def main(recorded_date=None):
+    # ── power.json 읽기 ──────────────────────────
+    power_json = json_store.load('power')
+    latest = power_json['dates'][0] if power_json['dates'] else None
     power_map = {}
-    with open('./data/01_dd_power.csv', newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            name = row['닉네임'].strip()
-            power_map[name] = {
-                '직업': row['직업'].strip(),
-                '레벨': row['레벨'].strip(),
-                '전투력': int(row['전투력'].strip()) if row['전투력'].strip().lstrip('-').isdigit() else 0,
+    if latest:
+        for r in power_json['records'][latest]:
+            power_map[r['name']] = {
+                '직업': r['job'],
+                '레벨': r['level'],
+                '전투력': r['power'],
             }
 
     # ── 02_dd_raid_in.csv 읽기 ───────────────────
@@ -130,15 +132,25 @@ def main():
         status = f"실압투:{silabtoo_str}" if silabtoo_str else '미참여'
         print(f"  {d['닉네임']:<14} 점수:{d['점수']:<12} {status}")
 
-    # ── 02_dd_raid_out.csv 저장 ───────────────────
-    fieldnames = ['닉네임', '직업', '레벨', '전투력', '점수', '예측점수', '실압투']
-    with open('./data/02_dd_raid_out.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(results)
+    print(f'\n완료! ({len(results)}건, R²={r2:.4f})')
 
-    print(f'\n완료! 02_dd_raid_out.csv 저장됨 ({len(results)}건, R²={r2:.4f})')
+    db_rows = [
+        {'name':      d['닉네임'],
+         'job':       d['직업'],
+         'level':     int(d['레벨']) if str(d['레벨']).isdigit() else 0,
+         'power':     d['power'],
+         'score_str': d['점수'],
+         'score_int': d['score_val'],
+         'predicted': r['예측점수'],
+         'silabtoo':  r['실압투']}
+        for d, r in zip(merged, results)
+    ]
+    saved_date = json_store.save('raid', db_rows, recorded_date)
+    print(f"✅ JSON 저장 완료 ({saved_date})")
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--date', default=None, help='기록 날짜 (YYYY-MM-DD, 기본: 오늘)')
+    args = parser.parse_args()
+    main(args.date)

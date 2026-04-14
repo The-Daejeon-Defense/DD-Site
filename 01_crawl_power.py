@@ -1,4 +1,5 @@
-import csv
+import argparse
+import json_store
 import time
 import selenium.webdriver
 from selenium.webdriver.firefox.options import Options
@@ -74,7 +75,7 @@ def search_character(driver, wait, name):
     return None
 
 
-def main():
+def main(recorded_date=None):
     with open("./data/01_daejeon_defense.csv", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         members = [(row["닉네임"].strip(), row["직위"].strip()) for row in reader if row["닉네임"].strip()]
@@ -98,13 +99,19 @@ def main():
 
     driver.quit()
 
-    with open("./data/01_dd_power.csv", "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(["닉네임", "직위", "직업", "레벨", "전투력"])
-        writer.writerows(results)
-
-    print(f"\n완료! 01_dd_power.csv 저장됨 ({len(results)}건)")
+    db_rows = [
+        {'name': r[0], 'role': r[1], 'job': r[2],
+         'level': int(r[3]) if str(r[3]).isdigit() else 0,
+         'power': r[4] if isinstance(r[4], int) else 0}
+        for r in results
+    ]
+    saved_date = json_store.save('power', db_rows, recorded_date)
+    print(f"\n완료! ({len(results)}건)")
+    print(f"✅ JSON 저장 완료 ({saved_date})")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--date', default=None, help='기록 날짜 (YYYY-MM-DD, 기본: 오늘)')
+    args = parser.parse_args()
+    main(args.date)
