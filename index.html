@@ -86,7 +86,11 @@
       <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
         <div class="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
           <span class="font-semibold text-white text-sm">멤버 목록</span>
-          <span class="text-xs text-gray-500" id="power-count"></span>
+          <div class="flex items-center gap-3">
+            <select id="power-date-select" onchange="loadPower(this.value)"
+                    class="bg-gray-800 text-gray-300 text-xs border border-gray-700 rounded px-2 py-1 cursor-pointer"></select>
+            <span class="text-xs text-gray-500" id="power-count"></span>
+          </div>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
@@ -220,7 +224,7 @@
   </main>
 
   <footer class="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-700">
-    대전방범대 대시보드 · 데이터 기준일: 2026-04-14
+    대전방범대 대시보드 · 데이터 기준일: <span id="footer-date">—</span>
   </footer>
 
   <script src="dashboard.js"></script>

@@ -1,8 +1,9 @@
 import argparse
+import csv
 import json_store
 import time
 import selenium.webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -26,9 +27,8 @@ def parse_power(text):
 
 def get_driver():
     options = Options()
-    options.binary_location = "/snap/firefox/current/usr/lib/firefox/firefox"
     options.add_argument("--headless")
-    return selenium.webdriver.Firefox(options=options)
+    return selenium.webdriver.Edge(options=options)
 
 
 def search_character(driver, wait, name):

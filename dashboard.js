@@ -348,6 +348,17 @@ function renderRaid() {
 // ─────────────────────────────────────────
 //  날짜별 섹션 전환 (재fetch 없이 메모리에서)
 // ─────────────────────────────────────────
+function loadPower(date) {
+  POWER_DATA = POWER_JSON.records[date] ?? [];
+  const prevDate = POWER_JSON.dates[POWER_JSON.dates.indexOf(date) + 1];
+  PREV_POWER = prevDate
+    ? Object.fromEntries((POWER_JSON.records[prevDate] ?? []).map(r => [r.name, r.power]))
+    : {};
+  updateDateSelect('power-date-select', date, POWER_JSON.dates);
+  renderHome();
+  renderPower();
+}
+
 function loadCompetition(date) {
   COMPETITION_DATA = COMPETITION_JSON.records[date] ?? [];
   updateDateSelect('competition-date-select', date, COMPETITION_JSON.dates);
@@ -403,9 +414,13 @@ async function loadAll() {
     TRAINING_CENTER_DATA = training.records[latestTraining]    ?? [];
     RAID_DATA            = raid.records[latestRaid]            ?? [];
 
+    updateDateSelect('power-date-select',        latestPower,    power.dates);
     updateDateSelect('competition-date-select', latestComp,     competition.dates);
     updateDateSelect('training-date-select',    latestTraining, training.dates);
     updateDateSelect('raid-date-select',        latestRaid,     raid.dates);
+
+    const footerDate = document.getElementById('footer-date');
+    if (footerDate) footerDate.textContent = latestPower;
 
     renderHome();
     renderPower();
