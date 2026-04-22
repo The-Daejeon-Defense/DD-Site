@@ -1,5 +1,6 @@
 {
   "dates": [
+    "2026-04-22",
     "2026-04-13"
   ],
   "records": {
@@ -261,6 +262,260 @@
         "job": "아크메이지(불,독)",
         "level": 93,
         "power": 324444870000,
+        "score": 0,
+        "predicted": 0,
+        "silabtoo": ""
+      }
+    ],
+    "2026-04-22": [
+      {
+        "name": "블랙경윤",
+        "job": "히어로",
+        "level": 101,
+        "power": 6959700000000,
+        "score": 4484106,
+        "predicted": 4395174,
+        "silabtoo": "+2.0%"
+      },
+      {
+        "name": "그린상훈",
+        "job": "신궁",
+        "level": 100,
+        "power": 5800200000000,
+        "score": 4014906,
+        "predicted": 3806369,
+        "silabtoo": "+5.5%"
+      },
+      {
+        "name": "김안셀모",
+        "job": "아크메이지(썬,콜)",
+        "level": 100,
+        "power": 4821100000000,
+        "score": 3555219,
+        "predicted": 3309172,
+        "silabtoo": "+7.4%"
+      },
+      {
+        "name": "오렌지완",
+        "job": "아크메이지(불,독)",
+        "level": 99,
+        "power": 2103000000000,
+        "score": 3100044,
+        "predicted": 1928893,
+        "silabtoo": "+60.7%"
+      },
+      {
+        "name": "나로e",
+        "job": "나이트로드",
+        "level": 100,
+        "power": 2749700000000,
+        "score": 2810070,
+        "predicted": 2257294,
+        "silabtoo": "+24.5%"
+      },
+      {
+        "name": "은평구돌주먹",
+        "job": "나이트로드",
+        "level": 98,
+        "power": 1608100000000,
+        "score": 2786427,
+        "predicted": 1677577,
+        "silabtoo": "+66.1%"
+      },
+      {
+        "name": "도돍",
+        "job": "아크메이지(썬,콜)",
+        "level": 97,
+        "power": 1853000000000,
+        "score": 2527908,
+        "predicted": 1801940,
+        "silabtoo": "+40.3%"
+      },
+      {
+        "name": "실버정환",
+        "job": "섀도어",
+        "level": 100,
+        "power": 2964200000000,
+        "score": 2222589,
+        "predicted": 2366219,
+        "silabtoo": "-6.1%"
+      },
+      {
+        "name": "민우민우민우",
+        "job": "섀도어",
+        "level": 100,
+        "power": 4486100000000,
+        "score": 1950933,
+        "predicted": 3139055,
+        "silabtoo": "-37.8%"
+      },
+      {
+        "name": "토우르",
+        "job": "신궁",
+        "level": 95,
+        "power": 537547680000,
+        "score": 1886826,
+        "predicted": 1133940,
+        "silabtoo": "+66.4%"
+      },
+      {
+        "name": "지난이야기",
+        "job": "히어로",
+        "level": 99,
+        "power": 2650800000000,
+        "score": 1773120,
+        "predicted": 2207071,
+        "silabtoo": "-19.7%"
+      },
+      {
+        "name": "쭈니짜응",
+        "job": "섀도어",
+        "level": 98,
+        "power": 1587500000000,
+        "score": 1679412,
+        "predicted": 1667117,
+        "silabtoo": "+0.7%"
+      },
+      {
+        "name": "닼읔낰이트",
+        "job": "다크나이트",
+        "level": 97,
+        "power": 2339000000000,
+        "score": 1659810,
+        "predicted": 2048736,
+        "silabtoo": "-19.0%"
+      },
+      {
+        "name": "즐똥1",
+        "job": "아크메이지(썬,콜)",
+        "level": 96,
+        "power": 1341500000000,
+        "score": 1622517,
+        "predicted": 1542195,
+        "silabtoo": "+5.2%"
+      },
+      {
+        "name": "가산요소",
+        "job": "섀도어",
+        "level": 99,
+        "power": 1258600000000,
+        "score": 1608009,
+        "predicted": 1500098,
+        "silabtoo": "+7.2%"
+      },
+      {
+        "name": "하영과돌돌",
+        "job": "히어로",
+        "level": 97,
+        "power": 1568500000000,
+        "score": 1484625,
+        "predicted": 1657468,
+        "silabtoo": "-10.4%"
+      },
+      {
+        "name": "맞수",
+        "job": "나이트로드",
+        "level": 97,
+        "power": 1374200000000,
+        "score": 1396995,
+        "predicted": 1558801,
+        "silabtoo": "-10.4%"
+      },
+      {
+        "name": "냥꾸니",
+        "job": "신궁",
+        "level": 95,
+        "power": 1025700000000,
+        "score": 1394850,
+        "predicted": 1381829,
+        "silabtoo": "+0.9%"
+      },
+      {
+        "name": "짬뽕에소주",
+        "job": "히어로",
+        "level": 98,
+        "power": 1536600000000,
+        "score": 1379505,
+        "predicted": 1641269,
+        "silabtoo": "-15.9%"
+      },
+      {
+        "name": "구준표춘",
+        "job": "아크메이지(썬,콜)",
+        "level": 97,
+        "power": 818656860000,
+        "score": 1334271,
+        "predicted": 1276690,
+        "silabtoo": "+4.5%"
+      },
+      {
+        "name": "앙끼모륑",
+        "job": "아크메이지(썬,콜)",
+        "level": 95,
+        "power": 813525680000,
+        "score": 1061202,
+        "predicted": 1274085,
+        "silabtoo": "-16.7%"
+      },
+      {
+        "name": "레드웅이",
+        "job": "비숍",
+        "level": 93,
+        "power": 229889810000,
+        "score": 1054743,
+        "predicted": 977708,
+        "silabtoo": "+7.9%"
+      },
+      {
+        "name": "KR#Z0AOAD3E5Y",
+        "job": "아크메이지(썬,콜)",
+        "level": 99,
+        "power": 1309900000000,
+        "score": 1054743,
+        "predicted": 1526148,
+        "silabtoo": "-30.9%"
+      },
+      {
+        "name": "표뚀",
+        "job": "나이트로드",
+        "level": 96,
+        "power": 1486800000000,
+        "score": 1009341,
+        "predicted": 1615980,
+        "silabtoo": "-37.5%"
+      },
+      {
+        "name": "돈키호테바이",
+        "job": "섀도어",
+        "level": 93,
+        "power": 290088400000,
+        "score": 693000,
+        "predicted": 1008278,
+        "silabtoo": "-31.3%"
+      },
+      {
+        "name": "브라운철",
+        "job": "아크메이지(썬,콜)",
+        "level": 91,
+        "power": 108673480000,
+        "score": 679704,
+        "predicted": 916153,
+        "silabtoo": "-25.8%"
+      },
+      {
+        "name": "전설의영포티",
+        "job": "섀도어",
+        "level": 95,
+        "power": 575299720000,
+        "score": 543495,
+        "predicted": 1153111,
+        "silabtoo": "-52.9%"
+      },
+      {
+        "name": "선미잉",
+        "job": "아크메이지(썬,콜)",
+        "level": 93,
+        "power": 509496800000,
         "score": 0,
         "predicted": 0,
         "silabtoo": ""
