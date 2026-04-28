@@ -1,5 +1,6 @@
 {
   "dates": [
+    "2026-04-27",
     "2026-04-20",
     "2026-04-13"
   ],
@@ -576,6 +577,308 @@
         "score_int": 4744870000,
         "predicted": 0,
         "silabtoo": ""
+      }
+    ],
+    "2026-04-27": [
+      {
+        "name": "그린상훈",
+        "job": "신궁",
+        "level": 101,
+        "power": 6864800000000,
+        "score_str": "134억5736만",
+        "score_int": 13457360000,
+        "predicted": 13062169531,
+        "silabtoo": "+3.0%"
+      },
+      {
+        "name": "블랙경윤",
+        "job": "히어로",
+        "level": 102,
+        "power": 7322300000000,
+        "score_str": "126억5736만",
+        "score_int": 12657360000,
+        "predicted": 13841753446,
+        "silabtoo": "-8.6%"
+      },
+      {
+        "name": "실버정환",
+        "job": "섀도어",
+        "level": 101,
+        "power": 2976600000000,
+        "score_str": "89억4945만",
+        "score_int": 8949450000,
+        "predicted": 6436643460,
+        "silabtoo": "+39.0%"
+      },
+      {
+        "name": "오렌지완",
+        "job": "아크메이지(불,독)",
+        "level": 100,
+        "power": 2120900000000,
+        "score_str": "106억2153만",
+        "score_int": 10621530000,
+        "predicted": 4978523338,
+        "silabtoo": "+113.3%"
+      },
+      {
+        "name": "김안셀모",
+        "job": "아크메이지(썬,콜)",
+        "level": 100,
+        "power": 4821100000000,
+        "score_str": "118억6965만",
+        "score_int": 11869650000,
+        "predicted": 9579687243,
+        "silabtoo": "+23.9%"
+      },
+      {
+        "name": "지난이야기",
+        "job": "히어로",
+        "level": 100,
+        "power": 3404200000000,
+        "score_str": "76억3487만",
+        "score_int": 7634870000,
+        "predicted": 7165277519,
+        "silabtoo": "+6.6%"
+      },
+      {
+        "name": "레드웅이",
+        "job": "비숍",
+        "level": 94,
+        "power": 304911660000,
+        "score_str": "15억5912만",
+        "score_int": 1559120000,
+        "predicted": 1884063667,
+        "silabtoo": "-17.2%"
+      },
+      {
+        "name": "브라운철",
+        "job": "아크메이지(썬,콜)",
+        "level": 92,
+        "power": 142531760000,
+        "score_str": "11억9704만",
+        "score_int": 1197040000,
+        "predicted": 1607366928,
+        "silabtoo": "-25.5%"
+      },
+      {
+        "name": "전설의영포티",
+        "job": "섀도어",
+        "level": 95,
+        "power": 673128900000,
+        "score_str": "17억1892만",
+        "score_int": 1718920000,
+        "predicted": 2511508995,
+        "silabtoo": "-31.6%"
+      },
+      {
+        "name": "하영과돌돌",
+        "job": "히어로",
+        "level": 98,
+        "power": 1677700000000,
+        "score_str": "40억5803만",
+        "score_int": 4058030000,
+        "predicted": 4223306745,
+        "silabtoo": "-3.9%"
+      },
+      {
+        "name": "토우르",
+        "job": "신궁",
+        "level": 96,
+        "power": 624163410000,
+        "score_str": "29억9451만",
+        "score_int": 2994510000,
+        "predicted": 2428071381,
+        "silabtoo": "+23.3%"
+      },
+      {
+        "name": "냥꾸니",
+        "job": "신궁",
+        "level": 96,
+        "power": 1134700000000,
+        "score_str": "31억0372만",
+        "score_int": 3103720000,
+        "predicted": 3298030099,
+        "silabtoo": "-5.9%"
+      },
+      {
+        "name": "나로e",
+        "job": "나이트로드",
+        "level": 100,
+        "power": 2974300000000,
+        "score_str": "76억5281만",
+        "score_int": 7652810000,
+        "predicted": 6432724240,
+        "silabtoo": "+19.0%"
+      },
+      {
+        "name": "닼읔낰이트",
+        "job": "다크나이트",
+        "level": 98,
+        "power": 2638100000000,
+        "score_str": "36억3226만",
+        "score_int": 3632260000,
+        "predicted": 5859836563,
+        "silabtoo": "-38.0%"
+      },
+      {
+        "name": "도돍",
+        "job": "아크메이지(썬,콜)",
+        "level": 98,
+        "power": 1943900000000,
+        "score_str": "80억5459만",
+        "score_int": 8054590000,
+        "predicted": 4676913823,
+        "silabtoo": "+72.2%"
+      },
+      {
+        "name": "짬뽕에소주",
+        "job": "히어로",
+        "level": 99,
+        "power": 1536600000000,
+        "score_str": "56억1935만",
+        "score_int": 5619350000,
+        "predicted": 3982871138,
+        "silabtoo": "+41.1%"
+      },
+      {
+        "name": "가산요소",
+        "job": "섀도어",
+        "level": 99,
+        "power": 1410500000000,
+        "score_str": "37억7251만",
+        "score_int": 3772510000,
+        "predicted": 3767995659,
+        "silabtoo": "+0.1%"
+      },
+      {
+        "name": "구준표춘",
+        "job": "아크메이지(썬,콜)",
+        "level": 98,
+        "power": 942731240000,
+        "score_str": "24억9755만",
+        "score_int": 2497550000,
+        "predicted": 2970913689,
+        "silabtoo": "-15.9%"
+      },
+      {
+        "name": "돈키호테바이",
+        "job": "섀도어",
+        "level": 93,
+        "power": 319591010000,
+        "score_str": "11억0438만",
+        "score_int": 1104380000,
+        "predicted": 1909077405,
+        "silabtoo": "-42.2%"
+      },
+      {
+        "name": "은평구돌주먹",
+        "job": "나이트로드",
+        "level": 99,
+        "power": 1760100000000,
+        "score_str": "44억8176만",
+        "score_int": 4481760000,
+        "predicted": 4363717050,
+        "silabtoo": "+2.7%"
+      },
+      {
+        "name": "쭈니짜응",
+        "job": "섀도어",
+        "level": 98,
+        "power": 1671500000000,
+        "score_str": "32억0605만",
+        "score_int": 3206050000,
+        "predicted": 4212741892,
+        "silabtoo": "-23.9%"
+      },
+      {
+        "name": "앙끼모륑",
+        "job": "아크메이지(썬,콜)",
+        "level": 95,
+        "power": 861743060000,
+        "score_str": "15억2665만",
+        "score_int": 1526650000,
+        "predicted": 2832909137,
+        "silabtoo": "-46.1%"
+      },
+      {
+        "name": "민우민우민우",
+        "job": "섀도어",
+        "level": 100,
+        "power": 4955400000000,
+        "score_str": "59억1474만",
+        "score_int": 5914740000,
+        "predicted": 9808535592,
+        "silabtoo": "-39.7%"
+      },
+      {
+        "name": "즐똥1",
+        "job": "아크메이지(썬,콜)",
+        "level": 97,
+        "power": 1341500000000,
+        "score_str": "31억7839만",
+        "score_int": 3178390000,
+        "predicted": 3650419068,
+        "silabtoo": "-12.9%"
+      },
+      {
+        "name": "표뚀",
+        "job": "나이트로드",
+        "level": 97,
+        "power": 1604100000000,
+        "score_str": "16억3651만",
+        "score_int": 1636510000,
+        "predicted": 4097891715,
+        "silabtoo": "-60.1%"
+      },
+      {
+        "name": "맞수",
+        "job": "나이트로드",
+        "level": 97,
+        "power": 1648800000000,
+        "score_str": "34억9028만",
+        "score_int": 3490280000,
+        "predicted": 4174060898,
+        "silabtoo": "-16.4%"
+      },
+      {
+        "name": "KR#Z0AOAD3E5Y",
+        "job": "아크메이지(썬,콜)",
+        "level": 100,
+        "power": 1902800000000,
+        "score_str": "50억8954만",
+        "score_int": 5089540000,
+        "predicted": 4606879071,
+        "silabtoo": "+10.5%"
+      },
+      {
+        "name": "선미잉",
+        "job": "아크메이지(썬,콜)",
+        "level": 94,
+        "power": 569520520000,
+        "score_str": "16억8376만",
+        "score_int": 1683760000,
+        "predicted": 2334959429,
+        "silabtoo": "-27.9%"
+      },
+      {
+        "name": "앙대박",
+        "job": "아크메이지(썬,콜)",
+        "level": 97,
+        "power": 2612600000000,
+        "score_str": "41억3450만",
+        "score_int": 4134500000,
+        "predicted": 5816384345,
+        "silabtoo": "-28.9%"
+      },
+      {
+        "name": "최샤",
+        "job": "섀도어",
+        "level": 97,
+        "power": 1326000000000,
+        "score_str": "36억4205만",
+        "score_int": 3642050000,
+        "predicted": 3624006936,
+        "silabtoo": "+0.5%"
       }
     ]
   }
